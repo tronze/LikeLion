@@ -31,11 +31,11 @@ class RegisterView(TemplateView):
 
     def post(self, *args, **kwargs):
         context = {}
+        link = get_object_or_404(RegisterLink, uuid=kwargs.get('uuid'))
         request = self.request
         form = UserPasswordResetForm(request.POST)
         if form.is_valid():
             password = form.cleaned_data['password2']
-            link = get_object_or_404(RegisterLink, uuid=kwargs.get('uuid'))
             user = link.user
             user.set_password(password)
             user.save()
@@ -43,5 +43,6 @@ class RegisterView(TemplateView):
             link.save()
             return render(request, 'registration/success.html', context)
         else:
+            context['link'] = link
             context['form'] = form
             return render(request, self.template_name, context)

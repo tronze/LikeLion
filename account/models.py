@@ -47,6 +47,9 @@ class User(AbstractUser):
     def __str__(self):
         return self.name
 
+    def get_short_name(self):
+        return "%s 회원님" % self.name
+
 
 def get_time_limit():
     return timezone.now() + timezone.timedelta(hours=1)

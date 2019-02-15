@@ -1,0 +1,22 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+    <div class="container text-center my-5">
+        <form class="col-md-6 m-auto p-0 text-left" method="POST">
+            {% csrf_token %}
+            <div>이메일 : {{ link.user.email }}</div>
+            <div>이름 : {{ link.user.name }}</div>
+            <div>휴대폰 번호 : {{ link.user.phone_number }}</div>
+            <div>생년월일 : {{ link.user.date_of_birth }}</div>
+            <div class="form-group pt-5">
+                {{ form.as_p }}
+            </div>
+            <div class="form-group py-3">
+                <input class="btn btn-block btn-main" type="submit" value="회원가입" />
+            </div>
+            <div class="text-center">
+                <a class="pr-3 text-muted" href="{% url 'login' %}">로그인 페이지로 이동</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

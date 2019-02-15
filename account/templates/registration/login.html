@@ -1,0 +1,17 @@
+{% extends 'registration/base.html' %}
+
+{% block content %}
+    <div class="container text-center my-5">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <div class="form-group col-md-6 py-3 mx-auto">
+                <input class="btn btn-main" type="submit" value="Login" />
+            </div>
+            <div class="text-center">
+                <!-- <a class="px-3 text-dark border-right" href="#">아이디 찾기</a> -->
+                <a class="pl-3 text-dark" href="#">비밀번호 찾기</a>
+            </div>
+        </form>
+    </div>
+{% endblock %}

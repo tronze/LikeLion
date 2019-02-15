@@ -10,7 +10,7 @@ def display_simple_web_calendar(request):
     context = dict()
     web_calendar = WebCalendar(year=2019)
     if 'month' in request.GET:
-        month = (lambda a: a if a > 0 or a < 13 else 1)(int(request.GET.get('month')))
+        month = (lambda a: a if 0 < a < 13 else 1)(int(request.GET.get('month')))
         context['calendar'] = mark_safe(web_calendar.print_calendar_table(month))
     else:
         context['calendar'] = mark_safe(web_calendar.print_calendar_table(1))

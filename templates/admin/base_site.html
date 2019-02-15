@@ -2,6 +2,9 @@
 {% load static %}
 
 {% block title %}{{ title }} | 서강 멋사 관리{% endblock %}
+{% block extrastyle %}
+<link rel="shortcut icon" href="{% static 'base/logo.png' %}">
+{% endblock %}
 
 {% block branding %}
 <h1 id="site-name"><a href="{% url 'admin:index' %}"><img src="{% static 'base/logo.png' %}" alt="Logo">서강 멋쟁이 사자처럼</a></h1>

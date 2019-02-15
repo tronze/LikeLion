@@ -1,13 +1,13 @@
 from calendar import month_name, day_name
 
-from base import BaseCalendar
-from web_elements.content import Content
-from web_elements.div import DivElement
-from web_elements.table import TableElement
-from web_elements.table.tbody import TbodyElement
-from web_elements.table.td import TdElement
-from web_elements.table.tr import TrElement
-from web_elements.web_classes import WebClasses
+from .base import BaseCalendar
+from .web_elements.content import Content
+from .web_elements.div import DivElement
+from .web_elements.table.table import TableElement
+from .web_elements.table.tbody import TbodyElement
+from .web_elements.table.td import TdElement
+from .web_elements.table.tr import TrElement
+from .web_elements.web_classes import WebClasses
 
 
 class WebCalendar(BaseCalendar):

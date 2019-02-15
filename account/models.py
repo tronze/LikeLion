@@ -26,9 +26,9 @@ class User(AbstractUser):
         unique=True,
     )
     phone_number = PhoneField(
-        verbose_name=_('Phone Number')
+        verbose_name=_('전화번호')
     )
-    date_of_birth = models.DateField(verbose_name=_('Date of Birth'))
+    date_of_birth = models.DateField(verbose_name=_('생년월일'))
     username = None
     first_name = None
     last_name = None

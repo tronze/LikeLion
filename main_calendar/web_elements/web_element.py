@@ -11,6 +11,9 @@ class WebElement(Node):
         self.classnames = WebClasses()
         self.child_nodes = list()
 
+    def __str__(self) -> str:
+        return self.create_element()
+
     def get_element_properties(self):
         classnames = self.classnames
         class_property = classnames.create_classnames_property()
@@ -38,3 +41,6 @@ class WebElement(Node):
             content += c_node.create_element()
         element = head + content + tail
         return element
+
+    def get_child_node_at(self, index: int):
+        return self.child_nodes[index]

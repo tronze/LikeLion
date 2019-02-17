@@ -1,5 +1,6 @@
 from calendar import month_name, day_name
 
+from main_calendar.web_elements.a import AElement
 from main_calendar.web_elements.table.th import ThElement
 from main_calendar.web_elements.table.thead import TheadElement
 from .base import BaseCalendar
@@ -14,20 +15,20 @@ from .web_elements.web_classes import WebClasses
 
 class WebCalendar(BaseCalendar):
 
-    def __init__(self, year, firstweekday=6):
+    def __init__(self, year, month, firstweekday=6):
         super().__init__(year, firstweekday)
+        self.month = month
+        self.web_calendar = self.init_calendar_table(month)
 
-    def print_calendar_table(self, month):
+    def init_calendar_table(self, month):
         weeks = super().get_weeks(month)
-
-        div = DivElement()
-        div.insert_node(Content("%s, %s" % (month_name[month], self.year)))
 
         table = TableElement()
 
         row_classname = WebClasses()
         row_classname.add_classname('row')
         row_classname.add_classname('m-0')
+        row_classname.add_classname('d-md-flex')
         col_classname = WebClasses()
         col_classname.add_classname('col')
 
@@ -62,7 +63,18 @@ class WebCalendar(BaseCalendar):
                     td.insert_node(Content(""))
                 # Print dates
                 else:
-                    td.insert_node(Content(str(day)))
+                    td_classname = WebClasses()
+                    td_classname.add_classname('col')
+                    td_classname.add_classname('active')
+                    a_tag = AElement()
+                    a_classname = WebClasses()
+                    a_tag.set_href("#")
+                    a_tag.insert_node(Content(str(day)))
+                    a_classname.add_classname("text-white")
+                    a_classname.add_classname("d-block")
+                    a_tag.set_classnames(a_classname)
+                    td.insert_node(a_tag)
+                    td.set_classnames(td_classname)
                 tr.insert_node(td)
             tbody.insert_node(tr)
         table.insert_node(tbody)
@@ -71,4 +83,18 @@ class WebCalendar(BaseCalendar):
         classnames.add_classname("table-bordered")
         classnames.add_classname("text-center")
         table.set_classnames(classnames)
-        return div.create_element() + table.create_element()
+        return table
+
+    def get_calendar_month(self):
+        return self.month
+
+    def get_calendar_year(self):
+        return self.year
+
+    def get_info_div(self):
+        div = DivElement()
+        div.insert_node(Content("%s, %s" % (month_name[self.month], self.year)))
+        return div
+
+    def get_calendar_table(self):
+        return self.web_calendar

@@ -1,7 +1,39 @@
 {% extends 'base/base.html' %}
 
+{% block extrastyle %}
+<style>
+
+    table thead {
+        background-color: #B11016;
+        color: #FFFFFF;
+    }
+
+    table tbody {
+        background-color: #B2B6B9;
+        color: #FFFFFF;
+    }
+
+    table tr {
+        display: table-row !important;
+    }
+
+    td.active {
+        cursor: pointer;
+    }
+
+    table td.active:hover {
+        background-color: #A2A6A9;
+        color: #FFFFFF;
+    }
+
+</style>
+{% endblock %}
+
 {% block content %}
-<div class="p-3">
-    {{ calendar }}
+<div class="py-3">
+    <h1>{{ info }}</h1>
+    <div style="overflow-x: scroll;">
+        {{ calendar }}
+    </div>
 </div>
 {% endblock %}

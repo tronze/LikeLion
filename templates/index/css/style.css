@@ -558,7 +558,7 @@ a {
     z-index: -1;
     display: inline-block;
     height: 28px;
-    background-color: rgba(84, 255, 219, 0.5);
+    background-color: rgba(249, 229, 230, 1);
     transition: 0.4s all ease-in-out
 }
 
@@ -615,7 +615,7 @@ a {
 }
 
 .btn-hover:hover {
-    color: #4a48fb
+    color: #B11016;
 }
 
 .btn-hover:hover::after {

@@ -17,7 +17,7 @@
   <header class="header">
     <div class="container">
       <h1 class="logo"><a href="index.html" aria-label="멋쟁이 사자처럼 서강대" lang="en"></a></h1>
-      <!-- <p class="para" aria-hidden="true">멋쟁이 사자처럼 <span>서강대</span></p> -->
+      <!-- <p class="para" aria-hidden="true">서강 멋사 <span><a href="{% url 'login' %}">로그인</a></span></p> -->
     </div>
   </header>
   <section class="landing">
@@ -185,17 +185,17 @@
       <div class="wrapper">
         <header class="plan-header">
           <p class="plan-category" lang="en">SCHEDULE</p>
-          <h2 class="plan-title highlight-green main-color text-bold"><span>2017년 멋사 일정을</span><br><span>소개합니다.</span></h2>
-          <p class="plan-content">서강대학교 멋쟁이 사자처럼은 매주 2회씩 각 2시간 - 2시간 반 동안 세션을 진행할 예정입니다. 중간고사를 기준으로 개발 공부와 실제 적용을 해보는 것으로 1학기 일정이 계획되어 있습니다. 구체적인 사항은 아래를 참고해주세요.</p>
+          <h2 class="plan-title highlight-green main-color text-bold"><span>2019년 멋사 일정을</span><br><span>소개합니다.</span></h2>
+          <p class="plan-content">서강대학교 멋쟁이 사자처럼은 매주 월,목 저녁 7시부터 9시까지 교육 세션을 진행할 예정입니다. 중간고사를 기준으로 개발 공부와 실제 적용을 해보는 것으로 1학기 일정이 계획되어 있습니다. 구체적인 사항은 아래를 참고해주세요.</p>
         </header>
         <div class="plan-items">
           <article class="plan-item">
             <h4 class="highlight-purple">중간고사 이전</h4>
-            <p class="content">웹은 어떻게 돌아가는 건지, 뭘 가지고 만드는지에 대해 공부합니다. 전체적인 웹의 아키텍쳐와 함께 Ruby on Rails 프레임워크를 활용한 웹 프로그래밍 개론을 다양한 실습과 함께 배워나갑니다.</p>
+            <p class="content">웹은 어떻게 돌아가는 건지, 뭘 가지고 만드는지에 대해 공부합니다. 전체적인 웹의 아키텍쳐와 함께 Django 프레임워크를 활용한 웹 프로그래밍 개론을 다양한 실습과 함께 배워나갑니다.</p>
           </article>
           <article class="plan-item">
             <h4 class="highlight-purple">중간고사 이후</h4>
-            <p class="content">기본적인 개념 정립을 마치고, 본격적으로 실제 웹서비스를 만들 때 필요한 꿀팁들과 Rails 심화 응용법을 알아봅니다. 이를 위해 꼭 필요한 프로그래밍 언어 Ruby 문법, 그리고 웹에 보석같은 기능을 추가해주는 gem들에 대해서 익혀볼거예요.</p>
+            <p class="content">기본적인 개념 정립을 마치고, 본격적으로 실제 웹서비스를 만들 때 필요한 기능을 하나씩 구현해봅니다. 또한 깃헙, 자바스크립트, API 등등을 익혀볼거예요.</p>
           </article>
           <article class="plan-item">
             <h4 class="highlight-purple">복커톤</h4>
@@ -206,13 +206,13 @@
             <p class="content">꿈꿔왔던 서비스 아이디어를 공유해요. 서로 의견을 나누며 아이디어를 다듬고, 팀원을 모집하는 기간이에요. 좋은 평가를 받은 상위 팀들은 발표 기회도 있어요!</p>
           </article>
           <article class="plan-item">
-            <h4 class="highlight-purple">미니해커톤</h4>
-            <p class="content">학기가 끝나기 전, 아이디어톤에서 정한 주제로 팀을 짜서 무박 2일의 해커톤을 진행합니다. 밤샘 코딩을 하면서 서강대학교 멋쟁이 사자처럼 멤버들과 함께 아이디어가 실제 서비스로 구현되는 뿌듯함을 함께 나눠봐요!</p>
+            <h4 class="highlight-purple">지역 연합 해커톤</h4>
+            <p class="content">2-3개 대학교와 연합하여 해커톤을 진행합니다. 처음보는 멋사인들과 팀을 이루어 아이디어를 공유하고, 서비스를 기획합니다. 밤새 코딩을 하면서 전국 멋사인들과 함께 아이디어가 실제 서비스로 구현되는 뿌듯함을 함께 나눠봐요!</p>
           </article>
           <article class="plan-item">
             <h4 class="highlight-purple">해커톤</h4>
-            <p class="content">여름방학 기간 중에 전국의 사자들이 모여 에너지를 불태우며 웹서비스를 만듭니다. 작년에는 잠실학생체육관에서, 제작년에는 경희대학교 평화의전당에서 무박 2일동안 진행을 했어요! 한 학기동안 열심히 쌓은 실력을 해커톤에 쏟아봐요! 멋사 해커톤의 열기를 느껴보고 싶다면, 아래 링크로!</p>
-            <a href="https://www.youtube.com/watch?v=jhGT8xKrY4o" class="sub-color" target="_blank">* 작년 영상이 궁금한가요?</a>
+            <p class="content">여름방학 기간 중에 전국의 사자들이 모여 에너지를 불태우며 웹 서비스를 만듭니다. 작년에는 화정체육관에서, 제작년에는 잠실학생체육관에서 무박 2일동안 진행 했어요! 한 학기동안 열심히 쌓은 실력을 해커톤에 쏟아봐요! 멋사 해커톤의 열기를 느껴보고 싶다면, 아래 링크로!</p>
+            <a href="https://www.facebook.com/pg/likelion.net/photos/?tab=album&album_id=2017616008263185&__xts__%5B0%5D=68.ARDIVZjLjd90P6xdq5ViO6xm2AWdtVae7zAQXppVpfkuFKj5nZ4L17tSE0ucVWDEJsQjf8pf2esC1IAo5H9pHSuky71uwXctbDSPsd1NIhiXnC_Zq2MvEAjP1dp_yzSiUSke2JsLoXbL1_eRWhT5v3KvSULL8adT2o_Osf2OQxBjUNRYjm4JcFeg7C3sdEbRvT2ABtLXxy40LL5WoRm_U4jEZPyDrtlg-hZ34K-gxMOCUCuNfWp2V3beYjzpzsBm67MUBNg3-KQY38hOA1iq2IwMoKUX25XFaN31lqz-WUpWEDKdYd73Men0eu5P4SHuHjO0xDTJQ31JFEKS4DdTIf4am1aLX0SpF2UBzQPeRwd_WPuujqHnveHC8Vkel6vUpx05qdJmaB4ndnD3O73pECD6TJfHinOqm4YtZcwzAtJX4b4ByXgOUddBz4OPuBRBrA5tBzN2Mx2vV2wh9rML&__tn__=-UC-R" class="sub-color" target="_blank">작년 사진이 궁금한가요?</a>
           </article>
         </div>
       </div>

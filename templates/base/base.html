@@ -37,7 +37,27 @@ Do the following if you're using your customized build of modernizr (http://www.
 {% block extrastyle %}{% endblock %}
 </head>
 <body>
-    {% block content %}
-    {% endblock %}
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <a class="navbar-brand" href="{% url 'index' %}">
+            <img src="{% static 'index/assets/logo.svg' %}" style="width: 30px; height: 30px;">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                {% if user.is_authenticated %}
+                <li class="nav-item"><a class="nav-link text-center" href="{% url 'logout' %}">로그아웃</a></li>
+                <li class="nav-item active"><a class="nav-link bg-main text-center" href="#">마이페이지</a></li>
+                {% else %}
+                <li class="nav-item active"><a class="nav-link bg-main text-center" href="{% url 'login' %}">로그인</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <div class="container-fluid">
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
 </html>

@@ -13,10 +13,6 @@
         color: #FFFFFF;
     }
 
-    table tr {
-        display: table-row !important;
-    }
-
     td.active {
         cursor: pointer;
     }
@@ -26,13 +22,17 @@
         color: #FFFFFF;
     }
 
+    table td.active a {
+        text-decoration: none;
+    }
+
 </style>
 {% endblock %}
 
 {% block content %}
 <div class="py-3">
     <h1>{{ info }}</h1>
-    <div style="overflow-x: scroll;">
+    <div>
         {{ calendar }}
     </div>
 </div>

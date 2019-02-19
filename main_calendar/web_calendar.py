@@ -1,4 +1,4 @@
-from calendar import month_name, day_name
+from calendar import month_name, day_name, day_abbr
 
 from main_calendar.web_elements.a import AElement
 from main_calendar.web_elements.table.th import ThElement
@@ -28,17 +28,16 @@ class WebCalendar(BaseCalendar):
         row_classname = WebClasses()
         row_classname.add_classname('row')
         row_classname.add_classname('m-0')
-        row_classname.add_classname('d-md-flex')
         col_classname = WebClasses()
         col_classname.add_classname('col')
 
         columns = list()
         # Print firstweekday to end of weekday first to format like a calendar.
         for dayname in range(self.firstweekday, len(day_name)):
-            columns.append(day_name[dayname])
+            columns.append(day_abbr[dayname][0])
         # Print rest of the weekday before firstweekday.
         for dayname in range(0, self.firstweekday):
-            columns.append(day_name[dayname])
+            columns.append(day_abbr[dayname][0])
         thead = TheadElement()
         tr = TrElement()
         tr.set_classnames(row_classname)
@@ -68,10 +67,9 @@ class WebCalendar(BaseCalendar):
                     td_classname.add_classname('active')
                     a_tag = AElement()
                     a_classname = WebClasses()
-                    a_tag.set_href("#")
+                    a_tag.set_href("#" + str(day))
                     a_tag.insert_node(Content(str(day)))
                     a_classname.add_classname("text-white")
-                    a_classname.add_classname("d-block")
                     a_tag.set_classnames(a_classname)
                     td.insert_node(a_tag)
                     td.set_classnames(td_classname)

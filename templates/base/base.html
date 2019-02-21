@@ -37,7 +37,7 @@ Do the following if you're using your customized build of modernizr (http://www.
 {% block extrastyle %}{% endblock %}
 </head>
 <body>
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom">
         <a class="navbar-brand" href="{% url 'index' %}">
             <img src="{% static 'index/assets/logo.svg' %}" style="width: 30px; height: 30px;">
         </a>
@@ -45,6 +45,10 @@ Do the following if you're using your customized build of modernizr (http://www.
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="#">Placeholder</a></li>
+            </ul>
+            <hr class="d-md-none">
             <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link text-center" href="{% url 'logout' %}">로그아웃</a></li>

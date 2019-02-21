@@ -3,3 +3,22 @@
     background-color: #B11016;
     color: #FFFFFF !important;
 }
+
+.btn-main {
+    background-color: #B11016;
+    color: #FFFFFF !important;
+}
+
+.bg-pic {
+    background: url(/static/index/assets/bg-image-3.jpg);
+    -webkit-background-size: cover;
+    background-size: cover;
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: -1;
+}

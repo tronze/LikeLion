@@ -1,16 +1,22 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% block content %}
+    <div class="bg-pic"></div>
     <div class="container text-center my-5">
-        <form method="POST">
+        <form class="border p-3 col-md-6 m-auto bg-white" method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
-            <div class="form-group col-md-6 py-3 mx-auto">
-                <input class="btn btn-main" type="submit" value="Login" />
+            <div class="form-group">
+                <img src="{% static 'index/assets/logo.svg' %}" style="width: 75.6px; height: 75.6px;">
             </div>
-            <div class="text-center">
-                <!-- <a class="px-3 text-dark border-right" href="#">아이디 찾기</a> -->
-                <a class="pl-3 text-dark" href="#">비밀번호 찾기</a>
+            <div class="form-group">
+                <input type="text" class="form-control" name="{{ form.username.html_name }}" autofocus="" required="" id="{{ form.username.id_for_label }}" placeholder="{{ form.username.label }}">
+            </div>
+            <div class="form-group">
+                <input type="password" class="form-control" name="{{ form.password.html_name }}" required="" id="{{ form.password.id_for_label }}" placeholder="{{ form.password.label }}">
+            </div>
+            <div class="form-group mt-5">
+                <input class="btn btn-main btn-block" type="submit" value="Login" />
             </div>
         </form>
     </div>

@@ -46,3 +46,19 @@ class RegisterView(TemplateView):
             context['link'] = link
             context['form'] = form
             return render(request, self.template_name, context)
+
+
+class MyView(TemplateView):
+    template_name = 'registration/profile.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        today = timezone.localdate()
+        year = today.year
+        month = today.month
+        web_calendar = WebCalendar(year, month)
+        web_calendar.set_today(year, month, today.day)
+        context['title'] = "마이페이지"
+        context['info'] = mark_safe(web_calendar.get_info_div().create_element())
+        context['calendar'] = mark_safe(web_calendar.get_calendar_table())
+        return context

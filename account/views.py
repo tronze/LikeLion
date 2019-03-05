@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
+from django.utils.safestring import mark_safe
 from django.views.generic import TemplateView
 from django.http import HttpResponseForbidden
 
@@ -7,6 +8,7 @@ from account.forms import UserPasswordResetForm
 from account.models import RegisterLink
 
 # Create your views here.
+from main_calendar.web_calendar import WebCalendar
 
 
 class MainView(TemplateView):
@@ -19,6 +21,7 @@ class RegisterView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(RegisterView, self).get_context_data(**kwargs)
         link = get_object_or_404(RegisterLink, uuid=context['uuid'])
+        context['title'] = "회원가입"
         context['link'] = link
         context['form'] = UserPasswordResetForm()
         return context
@@ -43,6 +46,7 @@ class RegisterView(TemplateView):
             link.save()
             return render(request, 'registration/success.html', context)
         else:
+            context['title'] = "회원가입"
             context['link'] = link
             context['form'] = form
             return render(request, self.template_name, context)

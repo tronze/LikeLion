@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic import ListView, DetailView, TemplateView
 
-from recruitment.models import Applicant, Application, ApplicantApplication
+from recruitment.models import Applicant, Application, ApplicantApplication, Evaluation
 
 
 # Create your views here.
@@ -14,8 +14,8 @@ class RecruitmentMainView(PermissionRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['title'] = "모집"
-        context['applicant_count'] = Applicant.objects.count()
-        context['application_count'] = ApplicantApplication.objects.count()
+        context['application'] = Evaluation.get_application()
+        context['application_count'] = Evaluation.get_application_count()
         return context
 
 

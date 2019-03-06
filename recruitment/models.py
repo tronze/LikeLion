@@ -85,13 +85,46 @@ class ApplicantApplication(models.Model):
 
 
 class Evaluation(models.Model):
+    application = models.ForeignKey(Application, on_delete=models.CASCADE)
+    active = models.BooleanField(default=False)
+    timestamp = models.DateTimeField(default=timezone.localtime)
+
+    def __str__(self):
+        return str(self.application)
+
+    @staticmethod
+    def get_active_evaluation():
+        try:
+            return Evaluation.objects.get(active=True)
+        except Evaluation.DoesNotExist:
+            return None
+
+    @staticmethod
+    def get_application():
+        evaluation = Evaluation.get_active_evaluation()
+        if evaluation is not None:
+            return evaluation.application
+        else:
+            return None
+
+    @staticmethod
+    def get_application_count():
+        application = Evaluation.get_application()
+        if application is not None:
+            return application.get_application_applicant_count()
+        else:
+            return 0
+
+
+class ApplicationEvaluation(models.Model):
     application = models.ForeignKey(ApplicantApplication, on_delete=models.CASCADE)
+    evaluation = models.ForeignKey(Evaluation, on_delete=models.CASCADE)
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(default=timezone.localtime)
 
 
 class AnswerEvaluation(models.Model):
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
-    evaluation = models.ForeignKey(Evaluation, on_delete=models.CASCADE)
+    application_evaluation = models.ForeignKey(ApplicationEvaluation, on_delete=models.CASCADE)
     score = models.PositiveIntegerField(default=0)
     timestamp = models.DateTimeField(default=timezone.localtime)

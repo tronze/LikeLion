@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('account.urls')),
     path('calendar/', include('lisg_calendar.urls')),
+    path('recruitment/', include('recruitment.urls')),
     path('', TemplateView.as_view(template_name='index/index.html'), name='index'),
 ]

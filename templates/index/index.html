@@ -17,7 +17,11 @@
   <header class="header">
     <div class="container">
       <h1 class="logo"><a href="index.html" aria-label="멋쟁이 사자처럼 서강대" lang="en"></a></h1>
-
+      {% if user.is_authenticated %}
+      <p class="para" aria-hidden="true">안녕하세요 {{ user.name }}님, <span><a href="{% url 'profile' %}">마이페이지</a></span></p>
+      {% else %}
+      <p class="para" aria-hidden="true">서강 멋사 <span><a href="{% url 'login' %}">로그인</a></span></p>
+      {% endif %}
     </div>
   </header>
   <section class="landing">

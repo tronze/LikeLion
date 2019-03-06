@@ -1,11 +1,11 @@
 from calendar import month_name, day_name, day_abbr
 
 from main_calendar.web_elements.a import AElement
+from main_calendar.web_elements.h1 import H1Element
 from main_calendar.web_elements.table.th import ThElement
 from main_calendar.web_elements.table.thead import TheadElement
 from .base import BaseCalendar
 from .web_elements.content import Content
-from .web_elements.div import DivElement
 from .web_elements.table.table import TableElement
 from .web_elements.table.tbody import TbodyElement
 from .web_elements.table.td import TdElement
@@ -18,7 +18,9 @@ class WebCalendar(BaseCalendar):
     def __init__(self, year, month, firstweekday=6):
         super().__init__(year, firstweekday)
         self.month = month
-        self.web_calendar = self.init_calendar_table(month)
+        self.today_y = 0
+        self.today_m = 0
+        self.today_d = 0
 
     def init_calendar_table(self, month):
         weeks = super().get_weeks(month)
@@ -30,6 +32,7 @@ class WebCalendar(BaseCalendar):
         row_classname.add_classname('m-0')
         col_classname = WebClasses()
         col_classname.add_classname('col')
+        col_classname.add_classname('p-0')
 
         columns = list()
         # Print firstweekday to end of weekday first to format like a calendar.
@@ -64,7 +67,10 @@ class WebCalendar(BaseCalendar):
                 else:
                     td_classname = WebClasses()
                     td_classname.add_classname('col')
+                    td_classname.add_classname('p-0')
                     td_classname.add_classname('active')
+                    if day == self.today_d and self.month == self.today_m and self.year == self.today_y:
+                        td_classname.add_classname('today')
                     a_tag = AElement()
                     a_classname = WebClasses()
                     a_tag.set_href("#" + str(day))
@@ -90,9 +96,14 @@ class WebCalendar(BaseCalendar):
         return self.year
 
     def get_info_div(self):
-        div = DivElement()
-        div.insert_node(Content("%s, %s" % (month_name[self.month], self.year)))
-        return div
+        h1 = H1Element()
+        h1.insert_node(Content("%s, %s" % (month_name[self.month], self.year)))
+        return h1
 
     def get_calendar_table(self):
-        return self.web_calendar
+        return self.init_calendar_table(self.month)
+
+    def set_today(self, year, month, day):
+        self.today_y = year
+        self.today_m = month
+        self.today_d = day

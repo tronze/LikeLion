@@ -1,4 +1,12 @@
 
+h1 {
+    font-weight: 700;
+}
+
+.footer {
+    padding-bottom: 1.75rem;
+}
+
 .bg-main {
     background-color: #B11016;
     color: #FFFFFF !important;
@@ -21,4 +29,22 @@
     top: 0;
     bottom: 0;
     z-index: -1;
+}
+
+.main-color {
+    color: #B11016;
+}
+
+a.main-color:hover {
+    color: #B2B6B9;
+}
+
+.sub-color {
+    color: #B2B6B9;
+}
+
+@media screen and (max-width: 768px) {
+    h1 {
+        font-size: 1.5rem;
+    }
 }

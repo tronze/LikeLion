@@ -10,7 +10,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>멋쟁이 사자처럼 | 서강대학교</title>
+<title>{{ title|default:'멋쟁이 사자처럼' }} | 서강멋사</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
 <link rel="stylesheet" href="/static/base/css/base.css">
 <link rel="shortcut icon" href="{% static 'base/logo.png' %}">
@@ -46,13 +46,16 @@ Do the following if you're using your customized build of modernizr (http://www.
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-                <li class="nav-item"><a class="nav-link" href="#">Placeholder</a></li>
+                {% if user.is_staff %}
+                <li class="nav-item"><a class="nav-link" href="{% url 'recruitment-main' %}">모집</a></li>
+                {% endif %}
+                <li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
             </ul>
             <hr class="d-md-none">
             <ul class="navbar-nav ml-auto">
                 {% if user.is_authenticated %}
                 <li class="nav-item"><a class="nav-link text-center" href="{% url 'logout' %}">로그아웃</a></li>
-                <li class="nav-item active"><a class="nav-link bg-main text-center" href="#">마이페이지</a></li>
+                <li class="nav-item active"><a class="nav-link bg-main text-center" href="{% url 'profile' %}">마이페이지</a></li>
                 {% else %}
                 <li class="nav-item active"><a class="nav-link bg-main text-center" href="{% url 'login' %}">로그인</a></li>
                 {% endif %}

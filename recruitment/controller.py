@@ -17,11 +17,12 @@ class EvaluationController(object):
         evaluations = self.evaluations
         application = self.application
         user = self.user
-        for obj in application.get_application_applicant().prefetch_related():
-            eval_dict = dict()
-            eval_dict['applicant'] = obj.get_applicant()
-            eval_dict['evaluated'] = obj.applicationevaluation_set.filter(user=user).count() > 0
-            evaluations.append(eval_dict)
+        if application is not None and user is not None:
+            for obj in application.get_application_applicant().prefetch_related():
+                eval_dict = dict()
+                eval_dict['applicant'] = obj.get_applicant()
+                eval_dict['evaluated'] = obj.applicationevaluation_set.filter(user=user).count() > 0
+                evaluations.append(eval_dict)
 
     def get_application_evaluation_states(self):
         return self.evaluations

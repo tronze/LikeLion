@@ -4,11 +4,35 @@
 <div class="container-fluid py-3">
     <div class="text-danger">운영진에게만 공개되는 페이지입니다.</div>
     <h1>서강대학교 멋쟁이 사자처럼 모집 시스템</h1>
-    <h3><span class="main-color">지원서 수집 중</span> &rarr; 지원서 평가 &rarr; 1차 결과 안내 &rarr; 면접 날짜 확정 &rarr; 면접 &rarr; 최종 결과 안내</h3>
+    <h3><span class="main-color">지원서 수집 중</span> &rarr; <span class="sub-color">지원서 평가</span> &rarr; <span class="sub-color">1차 결과 안내</span> &rarr; <span class="sub-color">면접 날짜 확정</span> &rarr; <span class="sub-color">면접</span> &rarr; <span class="sub-color">최종 결과 안내</span></h3>
     <hr>
     <div>
         <div>수집 중인 지원서 : {{ application }}</div>
         <div>수집된 지원서 수: {{ application_count }}개</div>
     </div>
+    {% if False %}
+    <div>
+        <table class="table text-center">
+            <thead>
+                <tr>
+                    <th>지원자 성함</th>
+                    <th>지원자 이메일</th>
+                    <th>지원자 전화번호</th>
+                    <th>내 평가 여부</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for evaluation in evaluations %}
+                <tr>
+                    <td>{{ evaluation.applicant }}</td>
+                    <td>{{ evaluation.applicant.email }}</td>
+                    <td>{{ evaluation.applicant.phone }}</td>
+                    <td>{% if evaluation.evaluated %}<a class="main-color" href="#">예</a>{% else %}<a class="main-color" href="#">아니오</a>{% endif %}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

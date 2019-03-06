@@ -1,32 +1,8 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
 {% block extrastyle %}
-<style>
-
-    table thead {
-        background-color: #B11016;
-        color: #FFFFFF;
-    }
-
-    table tbody {
-        background-color: #B2B6B9;
-        color: #FFFFFF;
-    }
-
-    td.active {
-        cursor: pointer;
-    }
-
-    table td.active:hover {
-        background-color: #A2A6A9;
-        color: #FFFFFF;
-    }
-
-    table td.active a {
-        text-decoration: none;
-    }
-
-</style>
+<link rel="stylesheet" type="text/css" href="{% static 'lisg_calendar/calendar.css' %}">
 {% endblock %}
 
 {% block content %}

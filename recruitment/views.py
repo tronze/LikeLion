@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.views.generic import ListView, DetailView, TemplateView
 
+from recruitment.controller import EvaluationController
 from recruitment.models import Applicant, Application, ApplicantApplication, Evaluation
 
 
@@ -16,6 +17,7 @@ class RecruitmentMainView(PermissionRequiredMixin, TemplateView):
         context['title'] = "모집"
         context['application'] = Evaluation.get_application()
         context['application_count'] = Evaluation.get_application_count()
+        context['evaluations'] = EvaluationController(context['application'], self.request.user).get_application_evaluation_states()
         return context
 
 

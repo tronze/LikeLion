@@ -1,0 +1,48 @@
+table thead {
+    background-color: #B11016;
+    color: #FFFFFF;
+}
+
+table tbody {
+    background-color: #B2B6B9;
+    color: #FFFFFF;
+}
+
+table thead th {
+    line-height: 35px;
+}
+
+table tbody td a {
+    display: block;
+    width: 100%;
+    height: 150px;
+    text-align: left;
+    padding: .5rem;
+}
+
+td.today {
+    background-color: #B11016;
+}
+
+td.active {
+    cursor: pointer;
+}
+
+table td.active.today:hover {
+    background-color: #910006;
+}
+
+table td.active:hover {
+    background-color: #A2A6A9;
+    color: #FFFFFF;
+}
+
+table td.active a {
+    text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+    table tbody td a {
+        height: 50px;
+    }
+}

@@ -1,0 +1,33 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="container-fluid py-3">
+    <div class="text-danger">운영진에게만 공개되는 페이지입니다.</div>
+    <h1>모집 지원자 리스트</h1>
+    <span>
+        <a href="#">지원자 추가</a>
+    </span>
+    <table class="table text-center mt-5">
+        <thead>
+            <tr>
+                <th>이름</th>
+                <th>분류</th>
+                <th>이메일</th>
+                <th>전화번호</th>
+                <th>지원서 수</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for applicant in applicants %}
+            <tr>
+                <td>{{ applicant.name }}</td>
+                <td><a href="#">{{ applicant.group }}</a></td>
+                <td>{{ applicant.email }}</td>
+                <td>{{ applicant.phone }}</td>
+                <td><a href="{% url 'recruitment-applicants-detail' pk=applicant.pk %}">{{ applicant.get_applicant_application_count }}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

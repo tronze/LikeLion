@@ -1,0 +1,26 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="container-fluid py-3">
+    <div class="text-danger">운영진에게만 공개되는 페이지입니다.</div>
+    <h1>{{ applicant.name }}님의 지원 정보입니다.</h1>
+    <h1>총 {{ applicant.get_applicant_application_count }}개</h1>
+    <table class="table text-center mt-5">
+        <thead>
+            <tr>
+                <th>지원서</th>
+                <th>등록시간</th>
+                <th>평가여부</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for application in applicant.get_applicant_application %}
+            <tr>
+                <td><a href="#">{{ application.get_application_name }}</a></td>
+                <td>{{ application.get_application_timestamp }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

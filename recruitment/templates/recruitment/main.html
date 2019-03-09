@@ -10,7 +10,6 @@
         <div>수집 중인 지원서 : {{ application }}</div>
         <div>수집된 지원서 수: {{ application_count }}개</div>
     </div>
-    {% if False %}
     <div>
         <table class="table text-center">
             <thead>
@@ -27,12 +26,11 @@
                     <td>{{ evaluation.applicant }}</td>
                     <td>{{ evaluation.applicant.email }}</td>
                     <td>{{ evaluation.applicant.phone }}</td>
-                    <td>{% if evaluation.evaluated %}<a class="main-color" href="#">예</a>{% else %}<a class="main-color" href="#">아니오</a>{% endif %}</td>
+                    <td><a class="main-color" href="{% url 'recruitment-evaluation-detail' pk=evaluation.application_pk %}">{% if evaluation.evaluated %}예{% else %}아니오{% endif %}</a></td>
                 </tr>
                 {% endfor %}
             </tbody>
         </table>
     </div>
-    {% endif %}
 </div>
 {% endblock %}

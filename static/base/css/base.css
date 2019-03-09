@@ -12,6 +12,10 @@ h1 {
     color: #FFFFFF !important;
 }
 
+.bg-main a {
+    color: #B2B6B9 !important;
+}
+
 .btn-main {
     background-color: #B11016;
     color: #FFFFFF !important;

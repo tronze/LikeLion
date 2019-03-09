@@ -1,0 +1,81 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="">
+    {% if msg is not None %}
+    <div class="{% if msg.0 == True %}bg-success{% else %}bg-danger{% endif %} text-center p-2 text-white">
+        <span class="">{{ msg.1 }}</span>
+    </div>
+    {% endif %}
+    <div class="container-fluid pt-3">
+        <div class="text-danger">운영진에게만 공개되는 페이지입니다.</div>
+        <h1>지원서 평가</h1>
+        <hr>
+    </div>
+    <div style="height: 100vh;">
+        <div class="w-100">
+            <div class="row m-0">
+                <div class="col-6">
+                    {% if applicant_application %}
+                    {% for q, a in applicant_application.get_application_data %}
+                    <div class="main-color font-weight-bold">{{ q.order }}. {{ q.question }}</div>
+                    <div>{% if a is not None %}{{ a }}{% else %}<span class="text-danger">답변없음</span>{% endif %}</div>
+                    <hr>
+                    {% endfor %}
+                    <h3><span class="font-weight-bold">{{ applicant_application.get_applicant.name }}</span>님에게 할 면접 질문 메모</h3>
+                    <form method="POST" action="{% url 'recruitment-evaluation-question' pk=applicant_application.pk %}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <textarea class="form-control" rows="10" name="question">{{ evaluation_question }}</textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-main">
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
+                <div class="col-6">
+                    <table class="table text-center">
+                        <thead>
+                            <tr>
+                                <th>지원자 성함</th>
+                                {% for question in evaluation_controller.get_questions %}
+                                <th>{{ question.order }}</th>
+                                {% endfor %}
+                                <th>액션</th>
+                            </tr>
+                        </thead>
+                        <tbody style="overflow-y: auto;">
+                            {% for evaluation in evaluation_controller.get_application_evaluation_states %}
+                            {% if pk == evaluation.pk %}
+                            <tr class="bg-main">
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <td>{{ evaluation.applicant }}</td>
+                                    {% for score in evaluation.scores %}
+                                    <td><input class="form-control" min="0" max="5" name="{{ score.0 }}" type="number" value="{% if score is not None %}{{ score.1 }}{% endif %}"></td>
+                                    {% endfor %}
+                                    <td><input class="btn btn-success" type="submit" value="저장"></td>
+                                </form>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td>{{ evaluation.applicant }}</td>
+                                {% for score in evaluation.scores %}
+                                <td>{{ score.1 }}</td>
+                                {% endfor %}
+                                <td><a href="{% url 'recruitment-evaluation-detail' pk=evaluation.pk %}">보기</a></td>
+                            </tr>
+                            {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

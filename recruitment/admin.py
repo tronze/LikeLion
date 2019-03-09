@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 from recruitment.models import Applicant, Application, Question, Answer, ApplicantApplication, Evaluation, \
-    ApplicationEvaluation
+    ApplicationEvaluation, AnswerEvaluation
 
 # Register your models here.
 
@@ -12,3 +12,4 @@ admin.site.register(Answer)
 admin.site.register(ApplicantApplication)
 admin.site.register(Evaluation)
 admin.site.register(ApplicationEvaluation)
+admin.site.register(AnswerEvaluation)

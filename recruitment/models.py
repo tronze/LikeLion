@@ -1,4 +1,5 @@
 from django.conf import settings
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.utils import timezone
 
@@ -126,5 +127,11 @@ class ApplicationEvaluation(models.Model):
 class AnswerEvaluation(models.Model):
     answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
     application_evaluation = models.ForeignKey(ApplicationEvaluation, on_delete=models.CASCADE)
-    score = models.PositiveIntegerField(default=0)
+    score = models.PositiveIntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
+    timestamp = models.DateTimeField(default=timezone.localtime)
+
+
+class EvaluationQuestion(models.Model):
+    application_evaluation = models.ForeignKey(ApplicationEvaluation, on_delete=models.CASCADE)
+    question = models.TextField()
     timestamp = models.DateTimeField(default=timezone.localtime)

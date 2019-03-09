@@ -13,6 +13,7 @@ class Applicant(models.Model):
     phone = models.CharField(max_length=11, default="")
     birthday = models.DateField(default=timezone.localdate)
     links = models.TextField(default="")
+    major = models.CharField(max_length=100, default="")
     timestamp = models.DateTimeField(default=timezone.localtime)
 
     def __str__(self):

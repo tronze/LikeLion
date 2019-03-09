@@ -29,7 +29,7 @@ def read_apply_csv():
         group = Group.objects.get(pk=1)
         application = Evaluation.get_application()
         applicant = Applicant.objects.create(name=name, group=group, email=email, phone=phone, links=links,
-                                             portfolio=portfolio)
+                                             portfolio=portfolio, year=year, major=major)
         applicant_application = ApplicantApplication.objects.create(applicant=applicant, application=application)
         questions = Question.objects.filter(application=application).order_by('order')
         Answer.objects.create(applicant=applicant, question=questions[0], answer=q1)

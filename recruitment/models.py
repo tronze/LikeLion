@@ -12,6 +12,7 @@ class Applicant(models.Model):
     email = models.EmailField(default="")
     phone = models.CharField(max_length=11, default="")
     birthday = models.DateField(default=timezone.localdate)
+    links = models.TextField(default="")
     timestamp = models.DateTimeField(default=timezone.localtime)
 
     def __str__(self):

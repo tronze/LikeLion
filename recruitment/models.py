@@ -148,4 +148,4 @@ class Interview(models.Model):
     timestamp = models.DateTimeField(default=timezone.localtime)
 
     def __str__(self):
-        return "%s, %s" % (self.applicant, self.date_time)
+        return "%s, %s" % (self.applicant, self.date_time.strftime("%y%m%d %H:%M"))

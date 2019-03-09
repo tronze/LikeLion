@@ -15,6 +15,7 @@ class Applicant(models.Model):
     links = models.TextField(default="")
     major = models.CharField(max_length=100, default="")
     year = models.CharField(max_length=8, default="")
+    portfolio = models.URLField(default="")
     timestamp = models.DateTimeField(default=timezone.localtime)
 
     def __str__(self):

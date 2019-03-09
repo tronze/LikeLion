@@ -146,3 +146,6 @@ class Interview(models.Model):
     applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE)
     date_time = models.DateTimeField()
     timestamp = models.DateTimeField(default=timezone.localtime)
+
+    def __str__(self):
+        return "%s, %s" % (self.applicant, self.date_time)

@@ -17,6 +17,8 @@
             <div class="row m-0">
                 <div class="col-6">
                     {% if applicant_application %}
+                    <h3>성함 : {{ applicant_application.get_applicant.name }}</h3>
+                    <div>관련 링크 : {{ applicant_application.get_applicant.links }}</div>
                     {% for q, a in applicant_application.get_application_data %}
                     <div class="main-color font-weight-bold">{{ q.order }}. {{ q.question }}</div>
                     <div>{% if a is not None %}{{ a }}{% else %}<span class="text-danger">답변없음</span>{% endif %}</div>

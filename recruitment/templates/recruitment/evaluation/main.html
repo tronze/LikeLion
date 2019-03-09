@@ -19,6 +19,9 @@
                     {% if applicant_application %}
                     <h3>성함 : {{ applicant_application.get_applicant.name }}</h3>
                     <div>관련 링크 : {{ applicant_application.get_applicant.links }}</div>
+                    <div>학번 : {{ applicant_application.get_applicant.year }}</div>
+                    <div>전공 : {{ applicant_application.get_applicant.major }}</div>
+                    <div>{{ applicant_application.get_applicant.portfolio }}</div>
                     <hr>
                     {% for q, a in applicant_application.get_application_data %}
                     <div class="main-color font-weight-bold">{{ q.order }}. {{ q.question }}</div>

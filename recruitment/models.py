@@ -142,7 +142,7 @@ class EvaluationQuestion(models.Model):
     timestamp = models.DateTimeField(default=timezone.localtime)
 
 
-class InterView(models.Model):
+class Interview(models.Model):
     applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE)
     date_time = models.DateTimeField()
     timestamp = models.DateTimeField(default=timezone.localtime)

@@ -13,9 +13,9 @@
         <hr>
     </div>
     <div style="height: 100vh;">
-        <div class="w-100">
-            <div class="row m-0">
-                <div class="col-6">
+        <div class="w-100 h-100">
+            <div class="row m-0 h-100">
+                <div class="col-6 h-100" style="overflow-y: auto;">
                     {% if applicant_application %}
                     <h3>성함 : {{ applicant_application.get_applicant.name }}</h3>
                     <div>관련 링크 : {{ applicant_application.get_applicant.links }}</div>
@@ -40,7 +40,7 @@
                     </form>
                     {% endif %}
                 </div>
-                <div class="col-6">
+                <div class="col-6 h-100" style="overflow-y: auto;">
                     <table class="table text-center">
                         <thead>
                             <tr>

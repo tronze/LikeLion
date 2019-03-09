@@ -147,5 +147,8 @@ class Interview(models.Model):
     date_time = models.DateTimeField()
     timestamp = models.DateTimeField(default=timezone.localtime)
 
+    class Meta:
+        ordering = ('date_time',)
+
     def __str__(self):
         return "%s, %s" % (self.applicant, self.date_time.astimezone().strftime("%y%m%d %H:%M"))

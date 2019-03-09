@@ -64,6 +64,7 @@ class Answer(models.Model):
 class ApplicantApplication(models.Model):
     application = models.ForeignKey(Application, on_delete=models.CASCADE)
     applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE)
+    passed = models.BooleanField(default=False)
 
     def __str__(self):
         return "%s님의 %s" % (self.applicant, self.application)
@@ -138,4 +139,10 @@ class AnswerEvaluation(models.Model):
 class EvaluationQuestion(models.Model):
     application_evaluation = models.ForeignKey(ApplicationEvaluation, on_delete=models.CASCADE)
     question = models.TextField()
+    timestamp = models.DateTimeField(default=timezone.localtime)
+
+
+class InterView(models.Model):
+    applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE)
+    date_time = models.DateTimeField()
     timestamp = models.DateTimeField(default=timezone.localtime)

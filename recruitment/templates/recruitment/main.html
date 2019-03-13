@@ -37,16 +37,16 @@
             <thead>
                 <tr>
                     <th>지원자 성함</th>
-                    <th>지원자 이메일</th>
                     <th>지원자 전화번호</th>
+                    <th>지원자 이메일</th>
                 </tr>
             </thead>
             <tbody>
                 {% for member in accepted %}
                     <tr>
                         <td>{{ member.applicant }}</td>
-                        <td>{{ member.applicant.email }}</td>
                         <td>{{ member.applicant.phone }}</td>
+                        <td>{{ member.applicant.email }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

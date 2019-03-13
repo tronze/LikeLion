@@ -10,7 +10,7 @@ if __name__ == "__main__":
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'LikeLion.settings')
     django.setup()
 
-    from .extractor import *
+    from recruitment.results.extractor import *
 
     try:
         print("init")
@@ -25,12 +25,14 @@ if __name__ == "__main__":
             for i in driver.data:
                 driver.get_detail(i)
 
-        except:
             driver.browser.close()
-            print("error")
+
+        except Exception as e:
+            print(e)
+            driver.browser.close()
         finally:
             driver.browser.close()
             print("end")
-    except:
-        print("init error")
-    driver.browser.close()
+    except Exception as e:
+        print(e)
+

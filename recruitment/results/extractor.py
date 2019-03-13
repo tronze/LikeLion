@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup as bs
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
 from recruitment.models import Applicant
@@ -15,7 +16,7 @@ class CrawlBrowser:
         options.add_argument('headless')
         options.add_argument('window-size=1920x1080')
         options.add_argument("disable-gpu")
-        self.browser = webdriver.Chrome('./chromedriver', chrome_options=options)
+        self.browser = webdriver.Chrome('chromedriver', chrome_options=options)
         self.data = {}
         self.url = ""
 
@@ -57,9 +58,9 @@ class CrawlBrowser:
         name = self.data[idx].get('name')
         state = 0
 
-        applicant = Applicant.objects.filter(name=name)
+        applicant = Applicant.objects.get(name=name)
         if applicant is not None:
-            interviewee = applicant.interviewees_set.all()
+            interviewee = applicant.interviewee_set.all()
             if interviewee.count() > 0:
                 if interviewee[0].accepted is True:
                     state = 4
@@ -70,7 +71,10 @@ class CrawlBrowser:
 
         html = self.browser.page_source
         soup = bs(html, 'html.parser')
-        selections = Select(soup.select("#id_applicant_state"))
+        selections = Select(self.browser.find_element_by_id("id_applicant_state"))
         selections.select_by_index(state)
+        btn = self.browser.find_element_by_class_name('signup')
+        btn.find_elements_by_tag_name('button')[0].click()
+        self.browser.implicitly_wait(2)
         print(selections)
 

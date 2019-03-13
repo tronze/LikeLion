@@ -142,9 +142,10 @@ class EvaluationQuestion(models.Model):
     timestamp = models.DateTimeField(default=timezone.localtime)
 
 
-class Interview(models.Model):
+class Interviewee(models.Model):
     applicant = models.ForeignKey(Applicant, on_delete=models.CASCADE)
     date_time = models.DateTimeField()
+    accepted = models.BooleanField(default=False)
     timestamp = models.DateTimeField(default=timezone.localtime)
 
     class Meta:
@@ -152,3 +153,8 @@ class Interview(models.Model):
 
     def __str__(self):
         return "%s, %s" % (self.applicant, self.date_time.astimezone().strftime("%y%m%d %H:%M"))
+
+
+class Interview(models.Model):
+    date_time = models.DateTimeField()
+    timestamp = models.DateTimeField(default=timezone.localtime)

@@ -152,7 +152,10 @@ class Interviewee(models.Model):
         ordering = ('date_time',)
 
     def __str__(self):
-        return "%s, %s" % (self.applicant, self.date_time.astimezone().strftime("%y%m%d %H:%M"))
+        accepted = ""
+        if self.accepted:
+            accepted = "합"
+        return "%s, %s - %s" % (self.applicant, self.date_time.astimezone().strftime("%y%m%d %H:%M"), accepted)
 
 
 class Interview(models.Model):

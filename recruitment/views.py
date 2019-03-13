@@ -4,7 +4,7 @@ from django.views.generic import ListView, DetailView, TemplateView
 
 from recruitment.controller import EvaluationController
 from recruitment.models import Applicant, Application, ApplicantApplication, Evaluation, \
-    AnswerEvaluation, EvaluationQuestion
+    AnswerEvaluation, EvaluationQuestion, Interviewee
 
 
 # Create your views here.
@@ -22,6 +22,7 @@ class RecruitmentMainView(PermissionRequiredMixin, TemplateView):
         evaluation_controller = EvaluationController(context['application'], self.request.user)
         evaluation_controller.process_evaluated_check()
         context['evaluations'] = evaluation_controller.get_application_evaluation_states()
+        context['accepted'] = Interviewee.objects.filter(accepted=True)
         return context
 
 

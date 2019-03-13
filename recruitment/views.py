@@ -12,7 +12,7 @@ from recruitment.models import Applicant, Application, ApplicantApplication, Eva
 
 class RecruitmentMainView(PermissionRequiredMixin, TemplateView):
     template_name = 'recruitment/main.html'
-    permission_required = 'view_applicationevaluation'
+    permission_required = ['recruitment.view_applicationevaluation']
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

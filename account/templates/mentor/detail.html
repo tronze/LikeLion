@@ -2,11 +2,66 @@
 
 {% block member-list %}
 <div class="container-fluid py-3">
-    <div class="row">
-        <div class="col">{{ i1 }}</div>
-        <div class="col">{{ i2 }}</div>
-        <div class="col">{{ i3 }}</div>
-        <div class="col">{{ i4 }}</div>
-    </div>
+    <table class="table table-bordered text-center">
+        <thead>
+            <tr>
+                <th>그룹</th>
+                <th>멘토</th>
+                <th>멘티</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th>1</th>
+                <td>
+                    {% for ele in i1.0 %}
+                        {{ ele.name }},
+                    {% endfor %}
+                </td>
+                <td>{% for ele in i1.1 %}
+                        {{ ele.name }},
+                    {% endfor %}</td>
+            </tr>
+            <tr>
+                <th>2</th>
+                <td>
+                    {% for ele in i2.0 %}
+                        {{ ele.name }},
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for ele in i2.1 %}
+                        {{ ele.name }},
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>3</th>
+                <td>
+                    {% for ele in i3.0 %}
+                        {{ ele.name }},
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for ele in i3.1 %}
+                        {{ ele.name }},
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>4</th>
+                <td>
+                    {% for ele in i4.0 %}
+                        {{ ele.name }},
+                    {% endfor %}
+                </td>
+                <td>
+                    {% for ele in i4.1 %}
+                        {{ ele.name }},
+                    {% endfor %}
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
 {% endblock %}

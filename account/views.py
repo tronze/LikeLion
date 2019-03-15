@@ -1,3 +1,6 @@
+import random
+
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, render
 from django.utils import timezone
 from django.utils.safestring import mark_safe
@@ -5,10 +8,11 @@ from django.views.generic import TemplateView
 from django.http import HttpResponseForbidden
 
 from account.forms import UserPasswordResetForm
-from account.models import RegisterLink
+from account.models import RegisterLink, User
 
 # Create your views here.
 from main_calendar.web_calendar import WebCalendar
+from recruitment.models import Interviewee
 
 
 class MainView(TemplateView):
@@ -66,3 +70,66 @@ class MyView(TemplateView):
         context['info'] = mark_safe(web_calendar.get_info_div().create_element())
         context['calendar'] = mark_safe(web_calendar.get_calendar_table())
         return context
+
+
+class MentorMenteeView(LoginRequiredMixin, TemplateView):
+    template_name = 'mentor/main.html'
+
+
+class MentorMenteeDetailView(LoginRequiredMixin, TemplateView):
+    template_name = 'mentor/detail.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        interviewees = list(Interviewee.objects.filter(accepted=True))
+        mentors = User.objects.filter(is_staff=True)
+
+        u1 = User.objects.filter(name='신유라')
+        u2 = User.objects.filter(name='조선미')
+
+        success = False
+
+        while not success:
+            results = self.shuffle_mentor_mentee(interviewees=interviewees, mentors=mentors)
+
+            i1 = results[0]
+            i2 = results[1]
+            i3 = results[2]
+            i4 = results[3]
+
+            if u1 in i1 and u2 in i1:
+                continue
+            if u1 in i2 and u2 in i2:
+                continue
+            if u1 in i3 and u2 in i3:
+                continue
+            if u1 in i4 and u2 in i4:
+                continue
+
+            success = True
+
+        context['i1'] = i1
+        context['i2'] = i2
+        context['i3'] = i4
+        context['i4'] = i3
+        return context
+
+    @staticmethod
+    def shuffle_mentor_mentee(interviewees, mentors):
+        random.shuffle(interviewees)
+        random.shuffle(mentors)
+        i1 = interviewees[:4]
+        i1.append(mentors[:2])
+        mentors = mentors[2:]
+        interviewees = interviewees[4:]
+        i2 = interviewees[:5]
+        i2.append(mentors[:2])
+        mentors = mentors[2:]
+        interviewees = interviewees[5:]
+        i3 = interviewees[:5]
+        i3.append(mentors[:2])
+        mentors = mentors[2:]
+        interviewees = interviewees[5:]
+        i4 = interviewees[:5]
+        i4.append(mentors[:2])
+        return i1, i2, i3, i4

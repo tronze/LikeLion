@@ -6,15 +6,15 @@
         <thead>
             <tr>
                 <th>그룹</th>
-                <th>멘토</th>
                 <th>멘티</th>
+                <th>멘토</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <th>1</th>
                 <td>
-                    {{ i1.0.name }}, {{ i1.1.name }}, {{ i1.2.name }}, {{ i1.3.name }},
+                    {{ i1.0.applicant.name }}, {{ i1.1.applicant.name }}, {{ i1.2.applicant.name }}, {{ i1.3.applicant.name }},
                 </td>
                 <td>
                     {% for ele in i1.4 %}
@@ -25,7 +25,7 @@
             <tr>
                 <th>2</th>
                 <td>
-                    {{ i2.0.name }}, {{ i2.1.name }}, {{ i2.2.name }}, {{ i2.3.name }}, {{ i2.4.name }},
+                    {{ i2.0.applicant.name }}, {{ i2.1.applicant.name }}, {{ i2.2.applicant.name }}, {{ i2.3.applicant.name }}, {{ i2.4.applicant.name }},
                 </td>
                 <td>
                     {% for ele in i2.5 %}
@@ -36,7 +36,7 @@
             <tr>
                 <th>3</th>
                 <td>
-                    {{ i3.0.name }}, {{ i3.1.name }}, {{ i3.2.name }}, {{ i3.3.name }}, {{ i3.4.name }},</td>
+                    {{ i3.0.applicant.name }}, {{ i3.1.applicant.name }}, {{ i3.2.applicant.name }}, {{ i3.3.applicant.name }}, {{ i3.4.applicant.name }},</td>
                 <td>
                     {% for ele in i3.5 %}
                         {{ ele.name }},
@@ -46,7 +46,7 @@
             <tr>
                 <th>4</th>
                 <td>
-                    {{ i4.0.name }}, {{ i4.1.name }}, {{ i4.2.name }}, {{ i4.3.name }}, {{ i4.4.name }},</td>
+                    {{ i4.0.applicant.name }}, {{ i4.1.applicant.name }}, {{ i4.2.applicant.name }}, {{ i4.3.applicant.name }}, {{ i4.4.applicant.name }},</td>
                 <td>
                     {% for ele in i4.5 %}
                         {{ ele.name }},

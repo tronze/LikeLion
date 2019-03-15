@@ -118,18 +118,18 @@ class MentorMenteeDetailView(LoginRequiredMixin, TemplateView):
     def shuffle_mentor_mentee(interviewees, mentors):
         random.shuffle(interviewees)
         random.shuffle(mentors)
-        i1 = interviewees[:4]
+        i1 = list(interviewees[:4])
         i1.append(mentors[:2])
         mentors = mentors[2:]
         interviewees = interviewees[4:]
-        i2 = interviewees[:5]
+        i2 = list(interviewees[:5])
         i2.append(mentors[:2])
         mentors = mentors[2:]
         interviewees = interviewees[5:]
-        i3 = interviewees[:5]
+        i3 = list(interviewees[:5])
         i3.append(mentors[:2])
         mentors = mentors[2:]
         interviewees = interviewees[5:]
-        i4 = interviewees[:5]
+        i4 = list(interviewees[:5])
         i4.append(mentors[:2])
         return i1, i2, i3, i4

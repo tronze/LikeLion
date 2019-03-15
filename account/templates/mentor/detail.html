@@ -14,23 +14,21 @@
             <tr>
                 <th>1</th>
                 <td>
-                    {% for ele in i1.0 %}
+                    {{ i1.0.name }}, {{ i1.1.name }}, {{ i1.2.name }}, {{ i1.3.name }},
+                </td>
+                <td>
+                    {% for ele in i1.4 %}
                         {{ ele.name }},
                     {% endfor %}
                 </td>
-                <td>{% for ele in i1.1 %}
-                        {{ ele.name }},
-                    {% endfor %}</td>
             </tr>
             <tr>
                 <th>2</th>
                 <td>
-                    {% for ele in i2.0 %}
-                        {{ ele.name }},
-                    {% endfor %}
+                    {{ i2.0.name }}, {{ i2.1.name }}, {{ i2.2.name }}, {{ i2.3.name }}, {{ i2.4.name }},
                 </td>
                 <td>
-                    {% for ele in i2.1 %}
+                    {% for ele in i2.5 %}
                         {{ ele.name }},
                     {% endfor %}
                 </td>
@@ -38,12 +36,9 @@
             <tr>
                 <th>3</th>
                 <td>
-                    {% for ele in i3.0 %}
-                        {{ ele.name }},
-                    {% endfor %}
-                </td>
+                    {{ i3.0.name }}, {{ i3.1.name }}, {{ i3.2.name }}, {{ i3.3.name }}, {{ i3.4.name }},</td>
                 <td>
-                    {% for ele in i3.1 %}
+                    {% for ele in i3.5 %}
                         {{ ele.name }},
                     {% endfor %}
                 </td>
@@ -51,12 +46,9 @@
             <tr>
                 <th>4</th>
                 <td>
-                    {% for ele in i4.0 %}
-                        {{ ele.name }},
-                    {% endfor %}
-                </td>
+                    {{ i4.0.name }}, {{ i4.1.name }}, {{ i4.2.name }}, {{ i4.3.name }}, {{ i4.4.name }},</td>
                 <td>
-                    {% for ele in i4.1 %}
+                    {% for ele in i4.5 %}
                         {{ ele.name }},
                     {% endfor %}
                 </td>

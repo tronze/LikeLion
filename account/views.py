@@ -82,7 +82,7 @@ class MentorMenteeDetailView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         interviewees = list(Interviewee.objects.filter(accepted=True))
-        mentors = User.objects.filter(is_staff=True)
+        mentors = list(User.objects.filter(is_staff=True))
 
         u1 = User.objects.filter(name='신유라')
         u2 = User.objects.filter(name='조선미')

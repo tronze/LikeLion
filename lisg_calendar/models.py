@@ -3,6 +3,7 @@ from django.db import models
 from django.utils import timezone
 
 # Create your models here.
+from LikeLion import utils
 
 
 class Event(models.Model):
@@ -20,6 +21,7 @@ class Event(models.Model):
 class Lesson(Event):
     teacher = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     classroom = models.CharField(max_length=100)
+    materials = models.FileField(upload_to=utils.custom_path, blank=True)
 
 
 class Absent(models.Model):

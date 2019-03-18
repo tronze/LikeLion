@@ -14,7 +14,7 @@ class Event(models.Model):
     timestamp = models.DateTimeField(default=timezone.localtime)
 
     def __str__(self):
-        return self.name + " - " + self.datetime_info.strftime("%Y%m%d %H:%M")
+        return self.name + " - " + self.datetime_info.astimezone().strftime("%Y%m%d %H:%M")
 
 
 class Lesson(Event):

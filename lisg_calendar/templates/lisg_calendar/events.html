@@ -11,7 +11,7 @@
                 <div class="card-body">
                     <h3 class="card-title">{{ event.name }}</h3>
                     <p class="card-text sub-color">
-                        {{ event.datetime_info.time }}
+                        {{ event.datetime_info.astimezone.time }}
                     </p>
                     {% if event.lesson %}
                     <p class="card-text">

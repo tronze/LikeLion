@@ -20,7 +20,7 @@
                     <p class="card-text">
                         멘토 : {{ event.lesson.teacher }}
                     </p>
-                    {% if event.lesson.material %}
+                    {% if event.lesson.materials %}
                     <span class="card-text">자료 :</span>
                      <a class="btn btn-main" href="{{ event.lesson.materials.url }}">다운받기</a>
                     {% endif %}

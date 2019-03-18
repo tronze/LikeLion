@@ -11,6 +11,7 @@ from account.forms import UserPasswordResetForm
 from account.models import RegisterLink, User
 
 # Create your views here.
+from lisg_calendar.models import Event, Absent
 from main_calendar.web_calendar import WebCalendar
 from recruitment.models import Interviewee
 
@@ -64,11 +65,16 @@ class MyView(TemplateView):
         today = timezone.localdate()
         year = today.year
         month = today.month
+        events = Event.objects.filter(datetime_info__month=month).order_by('datetime_info')
         web_calendar = WebCalendar(year, month)
         web_calendar.set_today(year, month, today.day)
+        web_calendar.set_events(events)
+        absent = Absent.objects.filter(user=self.request.user)
         context['title'] = "마이페이지"
         context['info'] = mark_safe(web_calendar.get_info_div().create_element())
         context['calendar'] = mark_safe(web_calendar.get_calendar_table())
+        context['absent'] = absent.filter(absent_type=1).count()
+        context['late'] = absent.filter(absent_type=2).count()
         return context
 
 

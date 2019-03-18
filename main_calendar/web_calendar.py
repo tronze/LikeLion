@@ -1,9 +1,11 @@
 from calendar import month_name, day_name, day_abbr
 
+from lisg_calendar.models import Event
 from main_calendar.web_elements.a import AElement
 from main_calendar.web_elements.h1 import H1Element
 from main_calendar.web_elements.table.th import ThElement
 from main_calendar.web_elements.table.thead import TheadElement
+
 from .base import BaseCalendar
 from .web_elements.content import Content
 from .web_elements.table.table import TableElement
@@ -21,9 +23,11 @@ class WebCalendar(BaseCalendar):
         self.today_y = 0
         self.today_m = 0
         self.today_d = 0
+        self.events = None
 
     def init_calendar_table(self, month):
         weeks = super().get_weeks(month)
+        events = self.events
 
         table = TableElement()
 
@@ -73,8 +77,13 @@ class WebCalendar(BaseCalendar):
                         td_classname.add_classname('today')
                     a_tag = AElement()
                     a_classname = WebClasses()
-                    a_tag.set_href("#" + str(day))
-                    a_tag.insert_node(Content(str(day)))
+                    a_tag.set_href("/calendar/events/" + str(self.year) + '-' + str(self.month) +'-' + str(day))
+                    etext = ""
+                    if events is not None:
+                        elist = self.events.filter(datetime_info__day=day)
+                        for event in elist:
+                            etext += event.name + "<br>"
+                    a_tag.insert_node(Content(str(day) + "<hr style='color: white; background-color: white; border-color: white;'>" + etext))
                     a_classname.add_classname("text-white")
                     a_tag.set_classnames(a_classname)
                     td.insert_node(a_tag)
@@ -107,3 +116,6 @@ class WebCalendar(BaseCalendar):
         self.today_y = year
         self.today_m = month
         self.today_d = day
+
+    def set_events(self, events: Event):
+        self.events = events

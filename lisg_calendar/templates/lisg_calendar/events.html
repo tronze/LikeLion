@@ -1,0 +1,29 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="container-fluid py-3">
+    <h1>서강대학교 멋쟁이 사자처럼 일정</h1>
+    <h1>{{ date_info }}</h1>
+    <hr>
+    <div>
+        {% for event in events %}
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title">{{ event.name }}</h3>
+                    <p class="card-text sub-color">
+                        {{ event.datetime_info.time }}
+                    </p>
+                    {% if event.lesson %}
+                    <p class="card-text">
+                        강의실 : {{ event.lesson.classroom }}
+                    </p>
+                    <p class="card-text">
+                        멘토 : {{ event.lesson.teacher }}
+                    </p>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -72,12 +72,14 @@ class MyView(TemplateView):
         return context
 
 
-class MentorMenteeView(LoginRequiredMixin, TemplateView):
+class MentorMenteeView(LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
     template_name = 'mentor/main.html'
+    permission_required = 'recruitment.view_interviewee'
 
 
-class MentorMenteeDetailView(LoginRequiredMixin, TemplateView):
+class MentorMenteeDetailView(LoginRequiredMixin, PermissionRequiredMixin, TemplateView):
     template_name = 'mentor/detail.html'
+    permission_required = 'recruitment.view_interviewee'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

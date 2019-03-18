@@ -48,6 +48,7 @@ Do the following if you're using your customized build of modernizr (http://www.
             <ul class="navbar-nav">
                 {% if user.is_staff %}
                 <li class="nav-item"><a class="nav-link" href="{% url 'recruitment-main' %}">모집</a></li>
+                <li class="nav-item"><a class="nav-link" href="{% url 'mentor-mentee-main' %}">멘토멘티</a></li>
                 {% endif %}
                 <li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
             </ul>

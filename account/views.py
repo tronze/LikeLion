@@ -69,7 +69,7 @@ class MyView(TemplateView):
         web_calendar = WebCalendar(year, month)
         web_calendar.set_today(year, month, today.day)
         web_calendar.set_events(events)
-        absent = Absent.objects.filter(user=self.request.user)
+        absent = Absent.objects.filter(user=self.request.user, counted=True)
         context['title'] = "마이페이지"
         context['info'] = mark_safe(web_calendar.get_info_div().create_element())
         context['calendar'] = mark_safe(web_calendar.get_calendar_table())

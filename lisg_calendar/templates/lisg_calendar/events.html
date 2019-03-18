@@ -20,8 +20,10 @@
                     <p class="card-text">
                         멘토 : {{ event.lesson.teacher }}
                     </p>
+                    {% if event.lesson.material %}
                     <span class="card-text">자료 :</span>
-                     <a class="btn btn-main" href="{{ event.lesson.material }}">다운받기</a>
+                     <a class="btn btn-main" href="{{ event.lesson.materials.url }}">다운받기</a>
+                    {% endif %}
                     {% endif %}
                 </div>
             </div>

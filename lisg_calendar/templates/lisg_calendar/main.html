@@ -6,8 +6,17 @@
 {% endblock %}
 
 {% block content %}
-<div class="py-3">
+<div class="container-fluid py-3">
+    <h1>서강대학교 멋쟁이 사자처럼 일정 달력</h1>
     <h1>{{ info }}</h1>
+    <form method="GET" class="col-12 col-md-3 p-0">
+        <span class="sub-color">해당 날짜로 이동</span>
+        <div class="form-group row mx-0">
+            <input class="form-control col mr-1" type="number" name="year" placeholder="년도" value="{{ year }}">
+            <input class="form-control col mr-2" type="number" name="month" placeholder="월" value="{{ month }}">
+            <input class="btn btn-main" type="submit" value="이동">
+        </div>
+    </form>
     <div>
         {{ calendar }}
     </div>

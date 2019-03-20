@@ -32,7 +32,7 @@ class Submit(Post):
 
 
 class SubmitImage(Submit):
-
+    image = models.ImageField(upload_to=utils.custom_path)
 
 
 class Question(Post):

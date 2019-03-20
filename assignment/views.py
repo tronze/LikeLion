@@ -4,7 +4,8 @@ from django.utils import timezone
 from django.views.generic import TemplateView, DetailView, CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from assignment.models import Assignment, Submit
+from assignment.models import Assignment, Submit, SubmitImage
+
 
 # Create your views here.
 
@@ -48,6 +49,39 @@ class AssignmentSubmitView(LoginRequiredMixin, CreateView):
         assignment = get_object_or_404(Assignment, pk=self.kwargs.get('pk'))
         form.instance.author = self.request.user
         form.instance.assignment = assignment
+        return super().form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        assignment = get_object_or_404(Assignment, pk=self.kwargs.get('pk'))
+        if assignment.due_date > timezone.localtime():
+            return super().post(request, *args, **kwargs)
+        else:
+            self.object = self.get_object()
+            context = self.get_context_data(object=self.object)
+            context['msg'] = (False, '제출 가능한 시간이 아닙니다.')
+            return self.render_to_response(context)
+
+    def get_success_url(self):
+        assignment = get_object_or_404(Assignment, pk=self.kwargs.get('pk'))
+        return reverse_lazy('assignment-detail', kwargs={'pk': assignment.pk})
+
+
+class AssignmentSubmitImageView(LoginRequiredMixin, CreateView):
+    template_name = 'assignment/create_image.html'
+    model = SubmitImage
+    fields = ('title', 'image',)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['assignment'] = get_object_or_404(Assignment, pk=self.kwargs.get('pk'))
+        context['timeup'] = True
+        return context
+
+    def form_valid(self, form):
+        assignment = get_object_or_404(Assignment, pk=self.kwargs.get('pk'))
+        form.instance.author = self.request.user
+        form.instance.assignment = assignment
+        form.instance.language = 6
         return super().form_valid(form)
 
     def post(self, request, *args, **kwargs):

@@ -15,9 +15,8 @@
     <div class="d-flex">
         <span class="sub-color">{{ assignment.due_date }} 마감</span>
         {% if not timeup %}
-        <a class="main-color ml-auto" href="{% url 'assignment-submit' pk=assignment.pk %}">+ 코드 제출하기</a>
-        <a class="main-color ml-auto" href="{% url 'assignment-submit' pk=assignment.pk %}">+ 코드 제출하기</a>
-        <a class="main-color ml-auto" href="{% url 'assignment-submit' pk=assignment.pk %}">+ 코드 제출하기</a>
+        <a class="main-color ml-auto" href="{% url 'assignment-submit' pk=assignment.pk %}">+ 코드/링크 제출하기</a>
+        <a class="main-color ml-3" href="{% url 'assignment-submit-image' pk=assignment.pk %}">+ 이미지 제출하기</a>
         {% endif %}
     </div>
     <div>
@@ -39,7 +38,15 @@
                 <a class="btn btn-main" href="{% url 'assignment-submit-delete' pk=submit.pk %}">삭제</a>
                 <div class="collapse py-3" id="submit-{{ submit.pk }}">
                     <div class="card card-body">
+                        {% if submit.language < 5 %}
                         <pre class="language-{{ submit.get_language_display }}"><code>{{ submit.content }}</code></pre>
+                        {% elif submit.language == 5 %}
+                        <a href="{{ submit.content }}" target="_blank">{{ submit.content }}</a>
+                        {% elif submit.language == 6 %}
+                        {% if submit.submitimage.image %}
+                        <img class="col-12" src="{{ submit.submitimage.image.url }}">
+                        {% endif %}
+                        {% endif %}
                     </div>
                 </div>
             </div>

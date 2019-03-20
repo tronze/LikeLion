@@ -8,6 +8,7 @@
     </div>
     {% endif %}
     <h1>서강대학교 멋쟁이 사자처럼 과제 시스템</h1>
+    <h1 class="main-color">{{ submit.assignment.name }}</h1>
     <form method="POST">
         {% csrf_token %}
         <p>정말로 {{ submit.title }}을/를 삭제하시겠습니까?</p>

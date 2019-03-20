@@ -28,7 +28,7 @@
         </div>
         <div class="form-group col-12">
             <div class="border rounded" id="{{ form.content.id_for_label }}-container">
-                <textarea class="form-control" rows="10" id="{{ form.content.id_for_label }}" name="{{ form.content.html_name }}"></textarea>
+                <textarea class="form-control" rows="10" id="{{ form.content.id_for_label }}" name="{{ form.content.html_name }}">{{ form.content.value }}</textarea>
             </div>
         </div>
         <div class="form-group col-8">
@@ -48,7 +48,6 @@
         myCodeMirror.setOption("mode", "python");
     else
         myCodeMirror.setOption("mode", "");
-    myCodeMirror.setValue('{{ form.content.value }}');
 
     </script>
 {% endblock %}

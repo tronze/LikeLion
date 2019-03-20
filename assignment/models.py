@@ -30,6 +30,9 @@ class Submit(Post):
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
     language = models.PositiveSmallIntegerField(choices=languages)
 
+    def __str__(self):
+        return "%s - %s" % (self.title, self.author)
+
 
 class SubmitImage(Submit):
     image = models.ImageField(upload_to=utils.custom_path)

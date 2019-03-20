@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils import timezone
 
+from LikeLion import utils
 from board.models import Post, Comment
 
 
@@ -14,6 +15,7 @@ class Assignment(models.Model):
     due_date = models.DateTimeField()
     open = models.BooleanField(default=False)
     last_update = models.DateTimeField(auto_now=True)
+    materials = models.FileField(upload_to=utils.custom_path, blank=True)
     timestamp = models.DateTimeField(default=timezone.localtime)
 
 

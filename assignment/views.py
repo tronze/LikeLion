@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views.generic import TemplateView, DetailView, CreateView
+from django.views.generic import TemplateView, DetailView, CreateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from assignment.models import Assignment, Submit
@@ -63,3 +63,20 @@ class AssignmentSubmitView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         assignment = get_object_or_404(Assignment, pk=self.kwargs.get('pk'))
         return reverse_lazy('assignment-detail', kwargs={'pk': assignment.pk})
+
+
+class SubmitDeleteView(LoginRequiredMixin, DeleteView):
+    template_name = 'assignment/delete.html'
+    model = Submit
+    context_object_name = 'submit'
+
+    def delete(self, request, *args, **kwargs):
+        if self.get_object().author != request.user:
+            self.object = self.get_object()
+            context = self.get_context_data(self.object)
+            context['msg'] = (False, '권한이 없습니다.')
+            self.render_to_response(context)
+        return super().delete(request, *args, **kwargs)
+
+    def get_success_url(self):
+        return reverse_lazy('assignment-detail', kwargs={'pk': self.get_object().assignment.pk})

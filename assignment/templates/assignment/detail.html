@@ -34,7 +34,7 @@
                 <h5 class="card-text sub-color">{{ submit.timestamp }}</h5>
                 <a class="btn btn-main" data-toggle="collapse" href="#submit-{{ submit.pk }}" role="button" aria-expanded="false" aria-controls="submit-{{ submit.pk }}">보기</a>
                 <a class="btn btn-main" href="#">편집</a>
-                <a class="btn btn-main" href="#">삭제</a>
+                <a class="btn btn-main" href="{% url 'assignment-delete' pk=submit.pk %}">삭제</a>
                 <div class="collapse py-3" id="submit-{{ submit.pk }}">
                     <div class="card card-body">
                         <pre class="language-{{ submit.get_language_display }}"><code>{{ submit.content }}</code></pre>

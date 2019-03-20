@@ -1,0 +1,17 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+<div class="container-fluid py-3">
+    {% if msg is not None %}
+    <div class="{% if msg.0 == True %}bg-success{% else %}bg-danger{% endif %} text-center p-2 text-white">
+        <span class="">{{ msg.1 }}</span>
+    </div>
+    {% endif %}
+    <h1>서강대학교 멋쟁이 사자처럼 과제 시스템</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <p>정말로 {{ submit.title }}을/를 삭제하시겠습니까?</p>
+        <input type="submit" class="btn btn-main" value="삭제">
+    </form>
+</div>
+{% endblock %}

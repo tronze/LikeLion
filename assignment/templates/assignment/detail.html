@@ -18,6 +18,11 @@
         <a class="main-color ml-auto" href="{% url 'assignment-submit' pk=assignment.pk %}">+ 제출하기</a>
         {% endif %}
     </div>
+    <div>
+        {% if event.lesson.materials %}
+        <a class="btn btn-main" href="{{ assignment.materials.url }}">자료 다운로드</a>
+        {% endif %}
+    </div>
     <hr>
     {% block assignment-block %}
     <div>

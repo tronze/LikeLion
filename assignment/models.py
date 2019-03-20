@@ -24,10 +24,15 @@ class Submit(Post):
         (1, 'HTML'),
         (2, 'CSS'),
         (3, 'Python'),
-        (4, 'Normal Text'),
+        (4, '일반 텍스트'),
+        (5, '링크'),
     )
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
     language = models.PositiveSmallIntegerField(choices=languages)
+
+
+class SubmitImage(Submit):
+
 
 
 class Question(Post):

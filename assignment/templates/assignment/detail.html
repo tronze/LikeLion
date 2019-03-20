@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block extrastyle %}
+<link rel="stylesheet" type="text/css" href="{% static 'assignment/prism.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container-fluid py-3">
+    {% block msg %}
+
+    {% endblock %}
+    <h1>서강대학교 멋쟁이 사자처럼 과제 시스템</h1>
+    <h1 class="main-color">{{ assignment.name }}</h1>
+    <div class="d-flex">
+        <span class="sub-color">{{ assignment.due_date }} 마감</span>
+        {% if not timeup %}
+        <a class="main-color ml-auto" href="{% url 'assignment-submit' pk=assignment.pk %}">+ 제출하기</a>
+        {% endif %}
+    </div>
+    <hr>
+    {% block assignment-block %}
+    <div>
+        <h1>제출 리스트</h1>
+        {% for submit in submits %}
+        <div class="card">
+            <div class="card-body">
+                <h3 class="card-title">{{ submit.title }}</h3>
+                <h5 class="card-text sub-color">{{ submit.timestamp }}</h5>
+                <a class="btn btn-main" data-toggle="collapse" href="#submit-{{ submit.pk }}" role="button" aria-expanded="false" aria-controls="submit-{{ submit.pk }}">보기</a>
+                <a class="btn btn-main" href="#">편집</a>
+                <a class="btn btn-main" href="#">삭제</a>
+                <div class="collapse py-3" id="submit-{{ submit.pk }}">
+                    <div class="card card-body">
+                        <pre class="language-{{ submit.get_language_display }}"><code>{{ submit.content }}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endblock %}
+</div>
+<script src="{% static 'assignment/prism.js' %}"></script>
+{% endblock %}

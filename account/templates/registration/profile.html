@@ -15,7 +15,7 @@
         <h1>총 <a class="main-color" href="#">n</a>개의 과제를 미제출하셨습니다.</h1>
     </div>
     <div class="mt-5">
-        {{ info }}
+        <a class="text-dark" href="{% url 'lisg-calendar-main' %}">{{ info }}</a>
         {{ calendar }}
     </div>
 </div>

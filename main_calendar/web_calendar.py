@@ -1,5 +1,7 @@
 from calendar import month_name, day_name, day_abbr
 
+from django.utils.translation import ugettext_lazy as _
+
 from lisg_calendar.models import Event
 from main_calendar.web_elements.a import AElement
 from main_calendar.web_elements.h1 import H1Element
@@ -106,7 +108,7 @@ class WebCalendar(BaseCalendar):
 
     def get_info_div(self):
         h1 = H1Element()
-        h1.insert_node(Content("%s, %s" % (month_name[self.month], self.year)))
+        h1.insert_node(Content("%s, %s" % (_(month_name[self.month]), self.year)))
         return h1
 
     def get_calendar_table(self):

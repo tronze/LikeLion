@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils import timezone
-from django.views.generic import TemplateView, DetailView, CreateView, DeleteView
+from django.views.generic import TemplateView, DetailView, CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from assignment.models import Assignment, Submit
@@ -63,6 +63,22 @@ class AssignmentSubmitView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         assignment = get_object_or_404(Assignment, pk=self.kwargs.get('pk'))
         return reverse_lazy('assignment-detail', kwargs={'pk': assignment.pk})
+
+
+class SubmitUpdateView(LoginRequiredMixin, UpdateView):
+    template_name = 'assignment/update.html'
+    model = Submit
+    fields = ('content',)
+    context_object_name = 'submit'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['assignment'] = self.get_object().assignment
+        context['timeup'] = True
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('assignment-detail', kwargs={'pk': self.get_object().assignment.pk})
 
 
 class SubmitDeleteView(LoginRequiredMixin, DeleteView):

@@ -1,0 +1,54 @@
+{% extends 'assignment/detail.html' %}
+{% load static %}
+
+{% block extrastyle %}
+<script src="{% static 'assignment/codemirror.js' %}"></script>
+<link rel="stylesheet" href="{% static 'assignment/codemirror.css' %}">
+<script src="{% static 'assignment/css/css.js' %}"></script>
+<script src="{% static 'assignment/javascript/javascript.js' %}"></script>
+<script src="{% static 'assignment/htmlmixed/htmlmixed.js' %}"></script>
+{% endblock %}
+
+{% block msg %}
+{% if msg is not None %}
+    <div class="{% if msg.0 == True %}bg-success{% else %}bg-danger{% endif %} text-center p-2 text-white">
+        <span class="">{{ msg.1 }}</span>
+    </div>
+    {% endif %}
+{% endblock %}
+
+{% block assignment-block %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group col-8">
+            <h3>{{ submit.title }}</h3>
+        </div>
+        <div class="form-group col-8">
+            {{ submit.get_language_display }}
+        </div>
+        <div class="form-group col-12">
+            <div class="border rounded" id="{{ form.content.id_for_label }}-container">
+                <textarea class="form-control" rows="10" id="{{ form.content.id_for_label }}" name="{{ form.content.html_name }}"></textarea>
+            </div>
+        </div>
+        <div class="form-group col-8">
+            <input type="submit" class="btn btn-main">
+        </div>
+    </form>
+    <script>
+    let codeArea = document.getElementById('{{ form.content.id_for_label }}');
+    let language = document.getElementById('{{ form.language.id_for_label }}');
+    var myCodeMirror = CodeMirror.fromTextArea(codeArea);
+    let mode = {{ submit.language }};
+    if (mode == 1)
+        myCodeMirror.setOption('mode', 'htmlmixed');
+    else if (mode == 2)
+        myCodeMirror.setOption("mode", "css");
+    else if (mode == 3)
+        myCodeMirror.setOption("mode", "python");
+    else
+        myCodeMirror.setOption("mode", "");
+    myCodeMirror.setValue('{{ form.content.value }}');
+
+    </script>
+{% endblock %}

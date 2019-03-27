@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block extrastyle %}
-<link rel="stylesheet" type="text/css" href="{% static 'assignment/prism.css' %}">
+{#<link rel="stylesheet" type="text/css" href="{% static 'assignment/prism.css' %}">#}
 {% endblock %}
 
 {% block content %}
@@ -32,22 +32,16 @@
         {% for submit in submits %}
         <div class="card">
             <div class="card-body">
-                <h3 class="card-title">{{ submit.title }}</h3>
                 <h5 class="card-text sub-color">{{ submit.timestamp }}</h5>
                 <a class="btn btn-main" data-toggle="collapse" href="#submit-{{ submit.pk }}" role="button" aria-expanded="false" aria-controls="submit-{{ submit.pk }}">보기</a>
                 <a class="btn btn-main" href="{% url 'assignment-submit-update' pk=submit.pk %}">편집</a>
                 <a class="btn btn-main" href="{% url 'assignment-submit-delete' pk=submit.pk %}">삭제</a>
                 <div class="collapse py-3" id="submit-{{ submit.pk }}">
                     <div class="card card-body">
-                        {% if submit.language < 5 %}
-                        <pre class="language-{{ submit.get_language_display }}"><code>{{ submit.content }}</code></pre>
-                        {% elif submit.language == 5 %}
-                        <a href="{{ submit.content }}" target="_blank">{{ submit.content }}</a>
-                        {% elif submit.language == 6 %}
-                        {% if submit.submitimage.image %}
-                        <img class="col-12" src="{{ submit.submitimage.image.url }}">
-                        {% endif %}
-                        {% endif %}
+                        <h3>실행 이미지</h3>
+                        <img class="col-6 p-0" src="{{ submit.image.url }}">
+                        <h3>링크</h3>
+                        <a href="{{ submit.link }}" target="_blank">{{ submit.link }}</a>
                     </div>
                 </div>
             </div>
@@ -56,5 +50,5 @@
     </div>
     {% endblock %}
 </div>
-<script src="{% static 'assignment/prism.js' %}"></script>
+{#<script src="{% static 'assignment/prism.js' %}"></script>#}
 {% endblock %}

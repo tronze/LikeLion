@@ -29,7 +29,7 @@ class AssignmentDetailView(LoginRequiredMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['submits'] = Submit.objects.filter(assignment=self.get_object(), author=self.request.user)
+        context['submits'] = AssignmentSubmitTotal.objects.filter(assignment=self.get_object(), author=self.request.user)
         context['timeup'] = self.get_object().due_date < timezone.localtime()
         return context
 
@@ -101,8 +101,8 @@ class AssignmentSubmitImageView(LoginRequiredMixin, CreateView):
 
 class SubmitUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'assignment/update.html'
-    model = Submit
-    fields = ('title', 'content',)
+    model = AssignmentSubmitTotal
+    fields = ('image', 'link',)
     context_object_name = 'submit'
 
     def get_context_data(self, **kwargs):
@@ -117,7 +117,7 @@ class SubmitUpdateView(LoginRequiredMixin, UpdateView):
 
 class SubmitDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'assignment/delete.html'
-    model = Submit
+    model = AssignmentSubmitTotal
     context_object_name = 'submit'
 
     def delete(self, request, *args, **kwargs):

@@ -21,15 +21,13 @@
     <form method="POST">
         {% csrf_token %}
         <div class="form-group col-8">
-            <h3>{{ submit.title }}</h3>
+            <h3>실행 이미지</h3>
+            <img class="my-1 col-3 p-0" src="{{ form.image.value.url }}">
+            <input type="file" class="form-control" name="{{ form.image.html_name }}" id="{{ form.image.id_for_label }}" required>
         </div>
         <div class="form-group col-8">
-            {{ submit.get_language_display }}
-        </div>
-        <div class="form-group col-12">
-            <div class="border rounded" id="{{ form.content.id_for_label }}-container">
-                <textarea class="form-control" rows="10" id="{{ form.content.id_for_label }}" name="{{ form.content.html_name }}">{{ form.content.value }}</textarea>
-            </div>
+            <h3>링크</h3>
+            <input type="url" class="form-control" name="{{ form.link.html_name }}" id="{{ form.link.id_for_label }}" value="{{ form.link.value }}" required>
         </div>
         <div class="form-group col-8">
             <input type="submit" class="btn btn-main">

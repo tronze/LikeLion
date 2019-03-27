@@ -11,7 +11,7 @@
     <h1 class="main-color">{{ submit.assignment.name }}</h1>
     <form method="POST">
         {% csrf_token %}
-        <p>정말로 {{ submit.title }}을/를 삭제하시겠습니까?</p>
+        <p>정말로 삭제하시겠습니까?</p>
         <input type="submit" class="btn btn-main" value="삭제">
     </form>
 </div>

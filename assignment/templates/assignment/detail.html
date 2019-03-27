@@ -15,8 +15,9 @@
     <div class="d-flex">
         <span class="sub-color">{{ assignment.due_date }} 마감</span>
         {% if not timeup %}
-        <a class="main-color ml-auto" href="{% url 'assignment-submit' pk=assignment.pk %}">+ 코드/링크 제출하기</a>
-        <a class="main-color ml-3" href="{% url 'assignment-submit-image' pk=assignment.pk %}">+ 이미지 제출하기</a>
+        <a class="main-color ml-auto" href="#">제출하기</a>
+{#        <a class="main-color ml-3" href="{% url 'assignment-submit' pk=assignment.pk %}">+ 코드/링크 제출하기</a>#}
+{#        <a class="main-color ml-3" href="{% url 'assignment-submit-image' pk=assignment.pk %}">+ 이미지 제출하기</a>#}
         {% endif %}
     </div>
     <div>

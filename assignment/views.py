@@ -102,7 +102,7 @@ class AssignmentSubmitImageView(LoginRequiredMixin, CreateView):
 class SubmitUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'assignment/update.html'
     model = Submit
-    fields = ('content',)
+    fields = ('title', 'content',)
     context_object_name = 'submit'
 
     def get_context_data(self, **kwargs):

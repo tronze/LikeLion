@@ -34,6 +34,12 @@ class Submit(Post):
         return "%s - %s" % (self.title, self.author)
 
 
+class AssignmentSubmitInformation(models.Model):
+    assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
+    language = models.PositiveSmallIntegerField(choices=Submit.languages)
+    timestamp = models.DateTimeField(default=timezone.localtime)
+
+
 class SubmitImage(Submit):
     image = models.ImageField(upload_to=utils.custom_path)
 

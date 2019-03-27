@@ -4,7 +4,7 @@ from django.utils import timezone
 from django.views.generic import TemplateView, DetailView, CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from assignment.models import Assignment, Submit, SubmitImage
+from assignment.models import Assignment, Submit, SubmitImage, AssignmentSubmitTotal
 
 
 # Create your views here.
@@ -130,3 +130,35 @@ class SubmitDeleteView(LoginRequiredMixin, DeleteView):
 
     def get_success_url(self):
         return reverse_lazy('assignment-detail', kwargs={'pk': self.get_object().assignment.pk})
+
+
+class TotalAssignmentSubmitView(LoginRequiredMixin, CreateView):
+    template_name = 'assignment/tcreate.html'
+    model = AssignmentSubmitTotal
+    fields = ('image', 'link',)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['assignment'] = get_object_or_404(Assignment, pk=self.kwargs.get('pk'))
+        context['timeup'] = True
+        return context
+
+    def form_valid(self, form):
+        assignment = get_object_or_404(Assignment, pk=self.kwargs.get('pk'))
+        form.instance.author = self.request.user
+        form.instance.assignment = assignment
+        return super().form_valid(form)
+
+    def post(self, request, *args, **kwargs):
+        assignment = get_object_or_404(Assignment, pk=self.kwargs.get('pk'))
+        if assignment.due_date > timezone.localtime():
+            return super().post(request, *args, **kwargs)
+        else:
+            self.object = self.get_object()
+            context = self.get_context_data(object=self.object)
+            context['msg'] = (False, '제출 가능한 시간이 아닙니다.')
+            return self.render_to_response(context)
+
+    def get_success_url(self):
+        assignment = get_object_or_404(Assignment, pk=self.kwargs.get('pk'))
+        return reverse_lazy('assignment-detail', kwargs={'pk': assignment.pk})

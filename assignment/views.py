@@ -18,7 +18,7 @@ class AssignmentView(LoginRequiredMixin, TemplateView):
         assignments = Assignment.objects.filter(open=True).order_by('due_date')
         context['assignments'] = assignments.filter(due_date__gt=timezone.localtime())
         context['timeup_assignments'] = assignments.filter(due_date__lte=timezone.localtime())
-        context['submit_count'] = Submit.objects.filter(author=self.request.user).values_list('assignment', flat=True).distinct().count()
+        context['submit_count'] = AssignmentSubmitTotal.objects.filter(author=self.request.user).values_list('assignment', flat=True).distinct().count()
         return context
 
 

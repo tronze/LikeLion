@@ -102,7 +102,7 @@ class AssignmentSubmitImageView(LoginRequiredMixin, CreateView):
 class SubmitUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'assignment/update.html'
     model = AssignmentSubmitTotal
-    fields = ('image', 'link',)
+    fields = ('image', 'link', 'description',)
     context_object_name = 'submit'
 
     def get_context_data(self, **kwargs):
@@ -135,7 +135,7 @@ class SubmitDeleteView(LoginRequiredMixin, DeleteView):
 class TotalAssignmentSubmitView(LoginRequiredMixin, CreateView):
     template_name = 'assignment/tcreate.html'
     model = AssignmentSubmitTotal
-    fields = ('image', 'link',)
+    fields = ('image', 'link', 'description',)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

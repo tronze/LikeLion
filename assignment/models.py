@@ -36,6 +36,7 @@ class Submit(Post):
 
 class AssignmentSubmitInformation(models.Model):
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
+    field_name = models.CharField(max_length=100)
     language = models.PositiveSmallIntegerField(choices=Submit.languages)
     timestamp = models.DateTimeField(default=timezone.localtime)
 

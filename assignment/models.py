@@ -37,7 +37,7 @@ class Submit(Post):
 class AssignmentSubmitTotal(models.Model):
     assignment = models.ForeignKey(Assignment, on_delete=models.CASCADE)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to=utils.custom_path)
+    image = models.ImageField(upload_to=utils.custom_path, blank=True)
     link = models.URLField()
     description = models.TextField()
     timestamp = models.DateTimeField(default=timezone.localtime)

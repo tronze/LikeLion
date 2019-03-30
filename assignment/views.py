@@ -1,9 +1,14 @@
+import json
+
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, QueryDict
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views.generic import TemplateView, DetailView, CreateView, DeleteView, UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
+from assignment.forms import AssignmentCommentForm
 from assignment.models import Assignment, Submit, SubmitImage, AssignmentSubmitTotal
 
 
@@ -164,3 +169,17 @@ class TotalAssignmentSubmitView(LoginRequiredMixin, CreateView):
     def get_success_url(self):
         assignment = get_object_or_404(Assignment, pk=self.kwargs.get('pk'))
         return reverse_lazy('assignment-detail', kwargs={'pk': assignment.pk})
+
+
+@login_required
+def assignment_comment(request):
+    if request.method == 'POST':
+        print(request.POST)
+        form = AssignmentCommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.save()
+            return HttpResponse(json.dumps({'result': True, 'content': comment.content, 'timestamp': comment.timestamp.astimezone().strftime('%Y-%m-%d %H:%M')}), content_type='application/json')
+        else:
+            return HttpResponse(json.dumps({'result': False}), content_type='application/json')

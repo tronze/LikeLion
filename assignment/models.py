@@ -42,6 +42,20 @@ class AssignmentSubmitTotal(models.Model):
     description = models.TextField()
     timestamp = models.DateTimeField(default=timezone.localtime)
 
+    def get_comments(self):
+        return self.assignmentcomment_set.all()
+
+    def get_comment_form(self):
+        from assignment.forms import AssignmentCommentForm
+        return AssignmentCommentForm(initial={'submit': self.pk})
+
+
+class AssignmentComment(models.Model):
+    submit = models.ForeignKey(AssignmentSubmitTotal, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    content = models.TextField()
+    timestamp = models.DateTimeField(default=timezone.localtime)
+
 
 class SubmitImage(Submit):
     image = models.ImageField(upload_to=utils.custom_path)

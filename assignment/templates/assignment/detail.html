@@ -65,6 +65,24 @@
             <a href="{{ submit.link }}" target="_blank">{{ submit.link }}</a>
             <h3>설명</h3>
             <div>{{ submit.description }}</div>
+            <hr>
+            <h1>댓글</h1>
+            <div class="comments">
+                {% for comment in submit.get_comments %}
+                <div>
+                    <h5>{{ comment.content }}</h5>
+                    <div class="sub-color">{{ comment.timestamp|date:'Y-m-d H:i' }}</div>
+                </div>
+                {% endfor %}
+            </div>
+            <hr>
+            <div>
+                <form method="POST" onsubmit="return create_comment(this);">
+                    {% csrf_token %}
+                    {{ submit.get_comment_form }}
+                    <input class="btn btn-main mt-3" type="submit" value="댓글달기">
+                </form>
+            </div>
         </div>
         {% endfor %}
     </div>
@@ -72,4 +90,50 @@
     {% endblock %}
 </div>
 {#<script src="{% static 'assignment/prism.js' %}"></script>#}
+<script
+  src="https://code.jquery.com/jquery-3.3.1.min.js"
+  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
+<script src="{% static 'assignment/js/ajax-plugin.js' %}"></script>
+<script>
+function create_comment(event) {
+    let dict_array = $(event).serializeArray();
+    var csrfmiddlewaretoken = '';
+    var content = '';
+    var submit = 0;
+    dict_array.forEach(function(entry) {
+        if (entry.name === 'csrfmiddlewaretoken')
+            csrfmiddlewaretoken = entry.value;
+        else if (entry.name === 'content')
+            content = entry.value;
+        else if (entry.name === 'submit')
+            submit = entry.value;
+    });
+    if (csrfmiddlewaretoken === '' || content === '' || submit === 0) {
+        alert("페이지 에러! 새로고침 해주세요.");
+        return false;
+    }
+    $.ajax({
+        type: "POST",
+        url: "{% url 'assginment-comment' %}",
+        data: {
+            csrfmiddlewaretoken: csrfmiddlewaretoken,
+            content: content,
+            submit: submit,
+        },
+        success: function(response) {
+            parent = event.parentElement.parentElement;
+            comment_div = $(parent).find(".comments")[0];
+            if (response.result == true) {
+                $(comment_div).append("<div><h5>" + response.content  + "</h5><div class='sub-color'>" + response.timestamp + "</div></div>");
+                $(".comment-content").val('');
+            } else
+                alert('에러! 잠시 후 다시 시도해주세요.');
+        },
+     });
+
+    return false;
+
+}
+</script>
 {% endblock %}

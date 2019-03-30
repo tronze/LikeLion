@@ -50,6 +50,23 @@
         </div>
         {% endfor %}
     </div>
+    {% if timeup %}
+    <hr>
+    <div>
+        <h1>다른 아기사자들의 과제</h1>
+        {% for submit in other_submits %}
+        <div class="card card-body">
+            <h1>{{ submit.author.name }}님의 과제</h1>
+            <h3>실행 이미지</h3>
+            <img class="col-6 p-0" src="{{ submit.image.url }}">
+            <h3>링크</h3>
+            <a href="{{ submit.link }}" target="_blank">{{ submit.link }}</a>
+            <h3>설명</h3>
+            <div>{{ submit.description }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
     {% endblock %}
 </div>
 {#<script src="{% static 'assignment/prism.js' %}"></script>#}

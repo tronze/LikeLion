@@ -11,7 +11,7 @@ from account.forms import UserPasswordResetForm
 from account.models import RegisterLink, User
 
 # Create your views here.
-from assignment.models import Submit, Assignment
+from assignment.models import Submit, Assignment, AssignmentSubmitTotal
 from lisg_calendar.models import Event, Absent
 from main_calendar.web_calendar import WebCalendar
 from recruitment.models import Interviewee
@@ -72,7 +72,7 @@ class MyView(TemplateView):
         web_calendar.set_events(events)
         absent = Absent.objects.filter(user=self.request.user, counted=True)
         assignment_count = Assignment.objects.count()
-        submit_count = Submit.objects.filter(author=self.request.user).values_list('assignment', flat=True).distinct().count()
+        submit_count = AssignmentSubmitTotal.objects.filter(author=self.request.user).values_list('assignment', flat=True).distinct().count()
         context['title'] = "마이페이지"
         context['info'] = mark_safe(web_calendar.get_info_div().create_element())
         context['calendar'] = mark_safe(web_calendar.get_calendar_table())

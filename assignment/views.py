@@ -9,7 +9,7 @@ from django.views.generic import TemplateView, DetailView, CreateView, DeleteVie
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from assignment.forms import AssignmentCommentForm
-from assignment.models import Assignment, Submit, SubmitImage, AssignmentSubmitTotal
+from assignment.models import Assignment, Submit, SubmitImage, AssignmentSubmitTotal, AssignmentComment
 
 
 # Create your views here.
@@ -183,3 +183,13 @@ def assignment_comment(request):
             return HttpResponse(json.dumps({'result': True, 'content': comment.content, 'timestamp': comment.timestamp.astimezone().strftime('%Y-%m-%d %H:%M')}), content_type='application/json')
         else:
             return HttpResponse(json.dumps({'result': False}), content_type='application/json')
+
+
+@login_required
+def assignment_comment_delete(request):
+    comment = get_object_or_404(AssignmentComment, pk=request.GET.get('pk'))
+    if comment.author == request.user:
+        comment.delete()
+        return HttpResponse(json.dumps({'result': True}), content_type='application/json')
+    else:
+        return HttpResponse(json.dumps({'result': False}), content_type='application/json')

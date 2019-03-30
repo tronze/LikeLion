@@ -1,7 +1,7 @@
 from django.urls import path
 
 from .views import AssignmentView, AssignmentDetailView, AssignmentSubmitView, AssignmentSubmitImageView, \
-    SubmitUpdateView, SubmitDeleteView, TotalAssignmentSubmitView, assignment_comment
+    SubmitUpdateView, SubmitDeleteView, TotalAssignmentSubmitView, assignment_comment, assignment_comment_delete
 
 # Create your path here.
 urlpatterns = [
@@ -13,4 +13,5 @@ urlpatterns = [
     path('update/<pk>/', SubmitUpdateView.as_view(), name='assignment-submit-update'),
     path('delete/<pk>/', SubmitDeleteView.as_view(), name='assignment-submit-delete'),
     path('comment/', assignment_comment, name='assginment-comment'),
+    path('comment/delete/', assignment_comment_delete, name='assignment-comment-delete'),
 ]

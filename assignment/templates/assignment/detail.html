@@ -69,9 +69,12 @@
             <h1>댓글</h1>
             <div class="comments">
                 {% for comment in submit.get_comments %}
-                <div>
+                <div class="my-3">
                     <h5>{{ comment.content }}</h5>
                     <div class="sub-color">{{ comment.timestamp|date:'Y-m-d H:i' }}</div>
+                    {% if comment.author == user %}
+                    <span><a href="#" onclick="return delete_comment(this);" data-pk="{{ comment.pk }}">삭제</a></span>
+                    {% endif %}
                 </div>
                 {% endfor %}
             </div>
@@ -134,6 +137,25 @@ function create_comment(event) {
 
     return false;
 
+}
+
+function delete_comment(event) {
+    if (confirm('삭제하시겠습니까?')) {
+        let pk = event.dataset['pk'];
+        $.ajax({
+            url: "{% url 'assignment-comment-delete' %}",
+            data: {
+                pk: pk
+            },
+            success: function (response) {
+                if (response.result === true) {
+                    event.parentElement.parentElement.remove();
+                } else
+                    alert("삭제할 수 없습니다.")
+            }
+        })
+    }
+    return false;
 }
 </script>
 {% endblock %}

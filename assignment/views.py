@@ -36,7 +36,7 @@ class AssignmentDetailView(LoginRequiredMixin, DetailView):
         context = super().get_context_data(**kwargs)
         context['submits'] = AssignmentSubmitTotal.objects.filter(assignment=self.get_object(), author=self.request.user)
         context['timeup'] = self.get_object().due_date < timezone.localtime()
-        if context['timeup'] or context['submits'].count() > 0:
+        if context['timeup'] or context['submits'].count() > 0 or self.request.user.is_staff:
             context['other_submits'] = AssignmentSubmitTotal.objects.filter(assignment=self.get_object())
         return context
 

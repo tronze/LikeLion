@@ -2,11 +2,11 @@
 {% load static %}
 
 {% block extrastyle %}
-<script src="{% static 'assignment/codemirror.js' %}"></script>
-<link rel="stylesheet" href="{% static 'assignment/codemirror.css' %}">
-<script src="{% static 'assignment/css/css.js' %}"></script>
-<script src="{% static 'assignment/javascript/javascript.js' %}"></script>
-<script src="{% static 'assignment/htmlmixed/htmlmixed.js' %}"></script>
+{#<script src="{% static 'assignment/codemirror.js' %}"></script>#}
+{#<link rel="stylesheet" href="{% static 'assignment/codemirror.css' %}">#}
+{#<script src="{% static 'assignment/css/css.js' %}"></script>#}
+{#<script src="{% static 'assignment/javascript/javascript.js' %}"></script>#}
+{#<script src="{% static 'assignment/htmlmixed/htmlmixed.js' %}"></script>#}
 {% endblock %}
 
 {% block msg %}
@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block assignment-block %}
-    <form method="POST">
+    <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group col-8">
             <h3>실행 이미지</h3>
@@ -37,19 +37,19 @@
             <input type="submit" class="btn btn-main">
         </div>
     </form>
-    <script>
-    let codeArea = document.getElementById('{{ form.content.id_for_label }}');
-    let language = document.getElementById('{{ form.language.id_for_label }}');
-    var myCodeMirror = CodeMirror.fromTextArea(codeArea);
-    let mode = {{ submit.language }};
-    if (mode == 1)
-        myCodeMirror.setOption('mode', 'htmlmixed');
-    else if (mode == 2)
-        myCodeMirror.setOption("mode", "css");
-    else if (mode == 3)
-        myCodeMirror.setOption("mode", "python");
-    else
-        myCodeMirror.setOption("mode", "");
-
-    </script>
+{#    <script>#}
+{#    let codeArea = document.getElementById('{{ form.content.id_for_label }}');#}
+{#    let language = document.getElementById('{{ form.language.id_for_label }}');#}
+{#    var myCodeMirror = CodeMirror.fromTextArea(codeArea);#}
+{#    let mode = {{ submit.language }};#}
+{#    if (mode == 1)#}
+{#        myCodeMirror.setOption('mode', 'htmlmixed');#}
+{#    else if (mode == 2)#}
+{#        myCodeMirror.setOption("mode", "css");#}
+{#    else if (mode == 3)#}
+{#        myCodeMirror.setOption("mode", "python");#}
+{#    else#}
+{#        myCodeMirror.setOption("mode", "");#}
+{##}
+{#    </script>#}
 {% endblock %}

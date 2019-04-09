@@ -1,3 +1,5 @@
+import uuid
+
 from django.conf import settings
 from django.db import models
 from django.utils import timezone
@@ -35,3 +37,14 @@ class Absent(models.Model):
     exemption = models.BooleanField(default=False)
     counted = models.BooleanField(default=False)
     timestamp = models.DateTimeField(default=timezone.localtime)
+
+
+class Alarm(models.Model):
+    event = models.ForeignKey(Event, on_delete=models.CASCADE)
+    aid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    alarm_dt = models.DateTimeField()
+    receivers = models.ManyToManyField(settings.AUTH_USER_MODEL)
+    timestamp = models.DateTimeField(default=timezone.localtime)
+
+    def __str__(self):
+        return "[%s]" % self.alarm_dt.astimezone().strftime("%Y년 %m월 %d일 %H시 %M분")
